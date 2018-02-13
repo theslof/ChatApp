@@ -23,5 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         //Do stuff
+        //Made some stuff
     }
 }
