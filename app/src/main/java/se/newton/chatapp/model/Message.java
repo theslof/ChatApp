@@ -5,34 +5,34 @@ import java.util.Date;
 public class Message {
     public static final int TYPE_TEXT = 0;
 
-    private long uid;
-    private long mid;
-    private long cid;
+    private String uid;
+    private String mid;
+    private String cid;
     private Date timestamp;
     private String data;
     private int messageType;
 
-    public long getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(long uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 
-    public long getMid() {
+    public String getMid() {
         return mid;
     }
 
-    public void setMid(long mid) {
+    public void setMid(String mid) {
         this.mid = mid;
     }
 
-    public long getCid() {
+    public String getCid() {
         return cid;
     }
 
-    public void setCid(long cid) {
+    public void setCid(String cid) {
         this.cid = cid;
     }
 
