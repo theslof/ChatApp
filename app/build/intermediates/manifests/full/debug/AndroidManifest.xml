@@ -27,7 +27,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme.NoActionBar" >
         <activity android:name="se.newton.chatapp.activity.MainActivity" />
         <activity android:name="se.newton.chatapp.activity.LauncherActivity" >
             <intent-filter>
@@ -36,7 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="se.newton.chatapp.activity.FirebaseLoginActivity" />
         <activity android:name="se.newton.chatapp.activity.SettingsActivity" />
 
         <meta-data
