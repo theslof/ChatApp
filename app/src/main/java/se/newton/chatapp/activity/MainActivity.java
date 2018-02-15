@@ -19,10 +19,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import se.newton.chatapp.R;
+import se.newton.chatapp.model.Channel;
+import se.newton.chatapp.model.Message;
 import se.newton.chatapp.model.User;
 
 public class MainActivity extends AppCompatActivity
@@ -78,7 +82,37 @@ public class MainActivity extends AppCompatActivity
         user.setUid(fUser.getUid());
         user.setDisplayName(fUser.getDisplayName());
 
+        Channel chan = new Channel();
+        chan.setCid("MyTestChannel");
 
+        List<Message> messages = new ArrayList<Message>();
+
+        Message message1 = new Message();
+        message1.setMessageType(Message.TYPE_TEXT);
+        message1.setUid(user.getUid());
+        message1.setCid(chan.getCid());
+        message1.setData("Test message 1");
+        messages.add(message1);
+
+        Message message2 = new Message();
+        message2.setMessageType(Message.TYPE_TEXT);
+        message2.setUid(user.getUid());
+        message2.setCid(chan.getCid());
+        message2.setData("Test message 2");
+        messages.add(message2);
+
+        Message message3 = new Message();
+        message3.setMessageType(Message.TYPE_TEXT);
+        message3.setUid(user.getUid());
+        message3.setCid(chan.getCid());
+        message3.setData("Test message 3");
+        messages.add(message3);
+
+        db.collection("channels").document(chan.getCid()).set(chan);
+        db.collection("users").document(user.getUid()).set(user);
+        db.collection("messages").add(message1);
+        db.collection("messages").add(message2);
+        db.collection("messages").add(message3);
     }
 
     @Override
