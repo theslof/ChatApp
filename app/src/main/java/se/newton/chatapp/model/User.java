@@ -1,10 +1,12 @@
 package se.newton.chatapp.model;
 
+import android.net.Uri;
+
 public class User {
     private String uid = "";
     private String displayName = "";
+    private String profileImage;
     //List<Channel>
-    //Profilbild
     //List<Users>
 
     public User(){}
@@ -28,5 +30,13 @@ public class User {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 }

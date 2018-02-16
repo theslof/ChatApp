@@ -14,12 +14,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,7 +47,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.buttonSignOut).setOnClickListener(View -> {
+        findViewById(R.id.signOutView).setOnClickListener(View -> {
             AuthUI.getInstance()
                     .signOut(this)
                     .addOnCompleteListener(task -> {
@@ -84,16 +89,17 @@ public class MainActivity extends AppCompatActivity
 
         //makeDummyData();
 
-        /*
         // Get the User object for the currently logged in user.
         Database.getUser(fUser.getUid(), user -> {
-            if (user != null)
-                printMessagesFrom(user.getUid());
-            else
+            if (user != null && user.getProfileImage() != null) {
+                Log.d(TAG, user.getProfileImage());
+                ImageView v = findViewById(R.id.profileImageView);
+                Glide.with(this).load(user.getProfileImage()).into(v);
+            }else {
                 Log.d(TAG, "User '" + fUser.getUid() + "' not found!");
+            }
         });
 
-       */
     }
 
     @Override

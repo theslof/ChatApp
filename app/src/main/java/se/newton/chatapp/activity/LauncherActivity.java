@@ -36,7 +36,7 @@ public class LauncherActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         //If not logged in, launch login intent
-        if(user == null){
+        if (user == null) {
             // Select login methods
             List<AuthUI.IdpConfig> providers = Arrays.asList(
                     // Email and password
@@ -59,14 +59,21 @@ public class LauncherActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == RC_SIGN_IN){
+        if (requestCode == RC_SIGN_IN) {
             IdpResponse response = IdpResponse.fromResultIntent(data);
 
-            if(resultCode == RESULT_OK){
+            if (resultCode == RESULT_OK) {
                 Database.createUser(firebaseAuth.getCurrentUser().getUid(), user -> {
-                    if(user != null){
-                        launchMainActivity();
-                    }else{
+                    if (user != null) {
+                        FirebaseUser fUser = firebaseAuth.getCurrentUser();
+                        if (fUser.getPhotoUrl() != null)
+                            user.setProfileImage(fUser.getPhotoUrl().toString());
+                        if (fUser.getDisplayName() != null)
+                            user.setDisplayName(fUser.getDisplayName());
+                        Database.updateUser(user, u -> {
+                            launchMainActivity();
+                        });
+                    } else {
                         Log.d(TAG, "Error creating user " + firebaseAuth.getCurrentUser().getUid());
                     }
                 });
@@ -74,7 +81,7 @@ public class LauncherActivity extends AppCompatActivity {
         }
     }
 
-    private void launchMainActivity(){
+    private void launchMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
