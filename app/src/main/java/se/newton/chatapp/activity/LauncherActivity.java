@@ -3,6 +3,7 @@ package se.newton.chatapp.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -13,7 +14,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Arrays;
 import java.util.List;
 
+import se.newton.chatapp.service.Database;
+
 public class LauncherActivity extends AppCompatActivity {
+    private static final String TAG = "LauncherActivity";
     private static final int RC_SIGN_IN = 123;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore db;
@@ -59,7 +63,13 @@ public class LauncherActivity extends AppCompatActivity {
             IdpResponse response = IdpResponse.fromResultIntent(data);
 
             if(resultCode == RESULT_OK){
-                launchMainActivity();
+                Database.createUser(firebaseAuth.getCurrentUser().getUid(), user -> {
+                    if(user != null){
+                        launchMainActivity();
+                    }else{
+                        Log.d(TAG, "Error creating user " + firebaseAuth.getCurrentUser().getUid());
+                    }
+                });
             }
         }
     }

@@ -12,6 +12,15 @@ public class Message {
     private String data;
     private int messageType;
 
+    public Message(){}
+
+    public Message(int messageType, String data){
+        this();
+        this.messageType = messageType;
+        this.data = data;
+        this.timestamp = new Date();
+    }
+
     public String getUid() {
         return uid;
     }

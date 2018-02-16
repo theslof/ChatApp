@@ -1,12 +1,18 @@
 package se.newton.chatapp.model;
 
 public class User {
-    private String uid;
-    private String displayName;
+    private String uid = "";
+    private String displayName = "";
     //List<Channel>
     //Profilbild
     //List<Users>
 
+    public User(){}
+
+    public User(String uid){
+        this();
+        this.uid = uid;
+    }
 
     public String getUid() {
         return uid;
