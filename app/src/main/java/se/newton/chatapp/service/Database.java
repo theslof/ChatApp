@@ -120,6 +120,13 @@ public final class Database {
                 });
     }
 
+    public static void userExists(String uid, Callback<Boolean> onCompleteCallback){
+        FirebaseFirestore.getInstance().collection("users").document(uid).get()
+                .addOnCompleteListener(task -> {
+                        onCompleteCallback.callback(task.isSuccessful() && task.getResult().exists());
+                });
+    }
+
     public interface Callback<T> {
         void callback(T result);
     }
