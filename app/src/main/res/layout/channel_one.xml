@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="se.newton.chatapp.fragment.First">
+    tools:context="se.newton.chatapp.fragment.ChannelOneFragment">
 
     <Button
         android:id="@+id/buttonSignOut"
@@ -13,5 +13,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/sign_out"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/_1" />
 
 </FrameLayout>

@@ -12,10 +12,10 @@ import se.newton.chatapp.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Second extends Fragment {
+public class ChannelTwoFragment extends Fragment {
 
 
-    public Second() {
+    public ChannelTwoFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class Second extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second2, container, false);
+        return inflater.inflate(R.layout.channel_two, container, false);
     }
 
 }

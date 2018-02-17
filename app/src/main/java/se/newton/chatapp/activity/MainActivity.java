@@ -1,5 +1,8 @@
 package se.newton.chatapp.activity;
 
+
+import android.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -26,6 +29,10 @@ import com.google.firebase.firestore.SetOptions;
 import java.util.HashMap;
 
 import se.newton.chatapp.R;
+
+import se.newton.chatapp.fragment.ChannelOneFragment;
+import se.newton.chatapp.fragment.ChannelThreeFragment;
+import se.newton.chatapp.fragment.ChannelTwoFragment;
 import se.newton.chatapp.model.Channel;
 import se.newton.chatapp.model.Message;
 import se.newton.chatapp.model.User;
@@ -41,6 +48,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         findViewById(R.id.signOutView).setOnClickListener(View -> {
             AuthUI.getInstance()
                     .signOut(this)
@@ -76,6 +84,10 @@ public class MainActivity extends AppCompatActivity
         fUser = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
     }
+
+
+
+
 
     @Override
     protected void onStart() {
@@ -134,13 +146,20 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_channel_one) {
+            ChannelOneFragment channelOneFragment = new ChannelOneFragment();
+            android.app.FragmentManager manager = getFragmentManager();
+            manager.beginTransaction().replace(R.id.signOutView, channelOneFragment).commit();
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_channel_two) {
+            ChannelTwoFragment channelTwoFragment = new ChannelTwoFragment();
+            android.app.FragmentManager manager = getFragmentManager();
+            manager.beginTransaction().replace(R.id.signOutView, channelTwoFragment).commit();
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_channel_three) {
+            ChannelThreeFragment channelThreeFragment = new ChannelThreeFragment();
+            android.app.FragmentManager manager = getFragmentManager();
+            manager.beginTransaction().replace(R.id.signOutView, channelThreeFragment).commit();
 
         } else if (id == R.id.nav_share) {
 
