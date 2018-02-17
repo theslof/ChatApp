@@ -1,5 +1,7 @@
 package se.newton.chatapp.model;
 
+import com.google.firebase.firestore.ServerTimestamp;
+
 import java.util.Date;
 
 public class Message {
@@ -8,9 +10,11 @@ public class Message {
     private String uid;
     private String mid;
     private String cid;
-    private Date timestamp;
     private String data;
     private int messageType;
+
+    @ServerTimestamp
+    private Date timestamp;
 
     public Message(){}
 
@@ -18,7 +22,6 @@ public class Message {
         this();
         this.messageType = messageType;
         this.data = data;
-        this.timestamp = new Date();
     }
 
     public String getUid() {

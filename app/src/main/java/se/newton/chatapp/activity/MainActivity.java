@@ -3,10 +3,7 @@ package se.newton.chatapp.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,18 +15,15 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+import com.google.firebase.firestore.SetOptions;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import se.newton.chatapp.R;
 import se.newton.chatapp.model.Channel;
@@ -87,7 +81,8 @@ public class MainActivity extends AppCompatActivity
     protected void onStart() {
         super.onStart();
 
-        //makeDummyData();
+        // makeDummyData();
+
 
         // Get the User object for the currently logged in user.
         Database.getUser(fUser.getUid(), user -> {
@@ -99,7 +94,6 @@ public class MainActivity extends AppCompatActivity
                 Log.d(TAG, "User '" + fUser.getUid() + "' not found!");
             }
         });
-
     }
 
     @Override
@@ -178,116 +172,107 @@ public class MainActivity extends AppCompatActivity
         Channel chan1 = new Channel();
         chan1.setCid("MyTestChannel");
 
-        Message message1 = new Message();
-        message1.setMessageType(Message.TYPE_TEXT);
+        Message message1 = new Message(Message.TYPE_TEXT, "Test message 1 Chan 1");
         message1.setUid(user.getUid());
         message1.setCid(chan1.getCid());
-        message1.setData("Test message 1 Chan 1");
 
-        Message message2 = new Message();
-        message2.setMessageType(Message.TYPE_TEXT);
+        Message message2 = new Message(Message.TYPE_TEXT, "");
         message2.setUid(user.getUid());
         message2.setCid(chan1.getCid());
         message2.setData("Test message 2 Chan 1");
 
-        Message message3 = new Message();
-        message3.setMessageType(Message.TYPE_TEXT);
+        Message message3 = new Message(Message.TYPE_TEXT, "");
         message3.setUid(user.getUid());
         message3.setCid(chan1.getCid());
         message3.setData("Test message 3 Chan 1");
 
-        Message message1_0 = new Message();
-        message1_0.setMessageType(Message.TYPE_TEXT);
+        Message message1_0 = new Message(Message.TYPE_TEXT, "");
         message1_0.setUid(user.getUid());
         message1_0.setCid(chan.getCid());
         message1_0.setData("Test message 1 Chan 2");
 
-        Message message2_0 = new Message();
-        message2_0.setMessageType(Message.TYPE_TEXT);
+        Message message2_0 = new Message(Message.TYPE_TEXT, "");
         message2_0.setUid(user.getUid());
         message2_0.setCid(chan.getCid());
         message2_0.setData("Test message 2 Chan 2");
 
-        Message message3_0 = new Message();
-        message3_0.setMessageType(Message.TYPE_TEXT);
+        Message message3_0 = new Message(Message.TYPE_TEXT, "");
         message3_0.setUid(user.getUid());
         message3_0.setCid(chan.getCid());
         message3_0.setData("Test message 3 Chan 2");
 
-        Message message1_1 = new Message();
-        message1_1.setMessageType(Message.TYPE_TEXT);
+        Message message1_1 = new Message(Message.TYPE_TEXT, "");
         message1_1.setUid(user1.getUid());
         message1_1.setCid(chan.getCid());
         message1_1.setData("Test message 1 from " + user1.getUid());
 
-        Message message2_1 = new Message();
-        message2_1.setMessageType(Message.TYPE_TEXT);
+        Message message2_1 = new Message(Message.TYPE_TEXT, "");
         message2_1.setUid(user1.getUid());
         message2_1.setCid(chan.getCid());
         message2_1.setData("Test message 2 from " + user1.getUid());
 
-        Message message3_1 = new Message();
-        message3_1.setMessageType(Message.TYPE_TEXT);
+        Message message3_1 = new Message(Message.TYPE_TEXT, "");
         message3_1.setUid(user1.getUid());
         message3_1.setCid(chan.getCid());
         message3_1.setData("Test message 3 from " + user1.getUid());
 
-        Message message1_2 = new Message();
-        message1_2.setMessageType(Message.TYPE_TEXT);
+        Message message1_2 = new Message(Message.TYPE_TEXT, "");
         message1_2.setUid(user2.getUid());
         message1_2.setCid(chan.getCid());
         message1_2.setData("Test message 1 from " + user2.getUid());
 
-        Message message2_2 = new Message();
-        message2_2.setMessageType(Message.TYPE_TEXT);
+        Message message2_2 = new Message(Message.TYPE_TEXT, "");
         message2_2.setUid(user2.getUid());
         message2_2.setCid(chan.getCid());
         message2_2.setData("Test message 2 from " + user2.getUid());
 
-        Message message3_2 = new Message();
-        message3_2.setMessageType(Message.TYPE_TEXT);
+        Message message3_2 = new Message(Message.TYPE_TEXT, "");
         message3_2.setUid(user1.getUid());
         message3_2.setCid(chan.getCid());
         message3_2.setData("Test message 3 from " + user2.getUid());
 
-        Message message1_3 = new Message();
-        message1_3.setMessageType(Message.TYPE_TEXT);
+        Message message1_3 = new Message(Message.TYPE_TEXT, "");
         message1_3.setUid(user2.getUid());
         message1_3.setCid(chan.getCid());
         message1_3.setData("Test message 1 from " + user3.getUid());
 
-        Message message2_3 = new Message();
-        message2_3.setMessageType(Message.TYPE_TEXT);
+        Message message2_3 = new Message(Message.TYPE_TEXT, "");
         message2_3.setUid(user2.getUid());
         message2_3.setCid(chan.getCid());
         message2_3.setData("Test message 2 from " + user3.getUid());
 
-        Message message3_3 = new Message();
-        message3_3.setMessageType(Message.TYPE_TEXT);
+        Message message3_3 = new Message(Message.TYPE_TEXT, "");
         message3_3.setUid(user1.getUid());
         message3_3.setCid(chan.getCid());
         message3_3.setData("Test message 3 from " + user3.getUid());
+
+        OnSuccessListener<DocumentReference> onSuccessListener = new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference doc) {
+                doc.set(new HashMap<String, String>(){{put("mid", doc.getId());}}, SetOptions.merge());
+            }
+        };
 
         db.collection("channels").document(chan1.getCid()).set(chan1);
         db.collection("channels").document(chan.getCid()).set(chan);
         db.collection("users").document(user1.getUid()).set(user1);
         db.collection("users").document(user2.getUid()).set(user2);
         db.collection("users").document(user3.getUid()).set(user3);
-        db.collection("messages").add(message1);
-        db.collection("messages").add(message2);
-        db.collection("messages").add(message3);
-        db.collection("messages").add(message1_0);
-        db.collection("messages").add(message2_0);
-        db.collection("messages").add(message3_0);
-        db.collection("messages").add(message1_1);
-        db.collection("messages").add(message2_1);
-        db.collection("messages").add(message3_1);
-        db.collection("messages").add(message1_2);
-        db.collection("messages").add(message2_2);
-        db.collection("messages").add(message3_2);
-        db.collection("messages").add(message1_3);
-        db.collection("messages").add(message2_3);
-        db.collection("messages").add(message3_3);
+        db.collection("messages").add(message1).addOnSuccessListener(onSuccessListener);
+        db.collection("messages").add(message2).addOnSuccessListener(onSuccessListener);
+        db.collection("messages").add(message3).addOnSuccessListener(onSuccessListener);
+        db.collection("messages").add(message1_0).addOnSuccessListener(onSuccessListener);
+        db.collection("messages").add(message2_0).addOnSuccessListener(onSuccessListener);
+        db.collection("messages").add(message3_0).addOnSuccessListener(onSuccessListener);
+        db.collection("messages").add(message1_1).addOnSuccessListener(onSuccessListener);
+        db.collection("messages").add(message2_1).addOnSuccessListener(onSuccessListener);
+        db.collection("messages").add(message3_1).addOnSuccessListener(onSuccessListener);
+        db.collection("messages").add(message1_2).addOnSuccessListener(onSuccessListener);
+        db.collection("messages").add(message2_2).addOnSuccessListener(onSuccessListener);
+        db.collection("messages").add(message3_2).addOnSuccessListener(onSuccessListener);
+        db.collection("messages").add(message1_3).addOnSuccessListener(onSuccessListener);
+        db.collection("messages").add(message2_3).addOnSuccessListener(onSuccessListener);
+        db.collection("messages").add(message3_3).addOnSuccessListener(onSuccessListener);
     }
 
     private void printMessagesFrom(String uid) {

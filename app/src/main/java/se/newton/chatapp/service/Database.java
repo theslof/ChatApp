@@ -9,7 +9,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import se.newton.chatapp.model.Channel;
 import se.newton.chatapp.model.Message;
@@ -31,21 +31,25 @@ public final class Database {
     public static void createUser(String uid, Callback<User> onCompleteCallback) {
         FirebaseFirestore.getInstance().collection("users").document(uid).get()
                 .addOnCompleteListener(task -> {
-                    DocumentSnapshot doc = task.getResult();
-                    if (doc.exists()) {
-                        Log.d(TAG, "User '" + uid + "' already exists");
-                        onCompleteCallback.callback(doc.toObject(User.class));
-                    } else {
-                        Log.d(TAG, "Creating user '" + uid + "'");
-                        User user = new User(uid);
-                        FirebaseFirestore.getInstance().collection("users")
-                                .document(uid).set(user).addOnCompleteListener(res -> {
-                            if (res.isSuccessful()) {
-                                onCompleteCallback.callback(user);
-                            } else {
-                                onCompleteCallback.callback(null);
-                            }
-                        });
+                    if(task.isSuccessful()) {
+                        DocumentSnapshot doc = task.getResult();
+                        if (doc.exists()) {
+                            Log.d(TAG, "User '" + uid + "' already exists");
+                            onCompleteCallback.callback(doc.toObject(User.class));
+                        } else {
+                            Log.d(TAG, "Creating user '" + uid + "'");
+                            User user = new User(uid);
+                            doc.getReference().set(user).addOnCompleteListener(res -> {
+                                if (res.isSuccessful()) {
+                                    onCompleteCallback.callback(user);
+                                } else {
+                                    onCompleteCallback.callback(null);
+                                }
+                            });
+                        }
+                    }else{
+                        Log.d(TAG, task.getException().toString());
+                        onCompleteCallback.callback(null);
                     }
                 });
     }
@@ -54,19 +58,24 @@ public final class Database {
     public static void createChannel(String cid, Callback<Channel> onCompleteCallback) {
         FirebaseFirestore.getInstance().collection("channels").document(cid).get()
                 .addOnCompleteListener(task -> {
-                    DocumentSnapshot doc = task.getResult();
-                    if (doc.exists()) {
-                        onCompleteCallback.callback(doc.toObject(Channel.class));
-                    } else {
-                        Channel channel = new Channel(cid);
-                        FirebaseFirestore.getInstance().collection("channels")
-                                .document(cid).set(channel).addOnCompleteListener(res -> {
-                            if (res.isSuccessful()) {
-                                onCompleteCallback.callback(channel);
-                            } else {
-                                onCompleteCallback.callback(null);
-                            }
-                        });
+                    if(task.isSuccessful()) {
+                        DocumentSnapshot doc = task.getResult();
+                        if (doc.exists()) {
+                            onCompleteCallback.callback(doc.toObject(Channel.class));
+                        } else {
+                            Channel channel = new Channel(cid);
+                            doc.getReference().set(channel).addOnCompleteListener(res -> {
+                                if (res.isSuccessful()) {
+                                    onCompleteCallback.callback(channel);
+                                } else {
+                                    Log.d(TAG, task.getException().toString());
+                                    onCompleteCallback.callback(null);
+                                }
+                            });
+                        }
+                    }else{
+                        Log.d(TAG, task.getException().toString());
+                        onCompleteCallback.callback(null);
                     }
                 });
 
@@ -74,14 +83,21 @@ public final class Database {
 
     // Creates a new message and returns a Message object
     public static void createMessage(int messageType, String data, String cid, Callback<Message> onCompleteCallback) {
+        DocumentReference doc = FirebaseFirestore.getInstance().collection("messages").document();
         Message message = new Message(messageType, data);
         message.setCid(cid);
         message.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        FirebaseFirestore.getInstance().collection("messages").add(message)
+        message.setMid(doc.getId());
+        doc.set(message)
                 .addOnCompleteListener(task -> {
-                    DocumentReference doc = task.getResult();
-                    message.setMid(doc.getId());
-                    onCompleteCallback.callback(message);
+                    if(task.isSuccessful()) {
+                        message.setMid(doc.getId());
+                        doc.set(new HashMap<>().put("mid", doc.getId()), SetOptions.merge());
+                        onCompleteCallback.callback(message);
+                    }else{
+                        Log.d(TAG, task.getException().toString());
+                        onCompleteCallback.callback(null);
+                    }
                 });
     }
 
@@ -97,6 +113,7 @@ public final class Database {
                         User user = doc.toObject(User.class);
                         onCompleteCallback.callback(user);
                     } else {
+                        Log.d(TAG, task.getException().toString());
                         onCompleteCallback.callback(null);
                     }
                 });
@@ -111,6 +128,7 @@ public final class Database {
                         Channel channel = doc.toObject(Channel.class);
                         onCompleteCallback.callback(channel);
                     } else {
+                        Log.d(TAG, task.getException().toString());
                         onCompleteCallback.callback(null);
                     }
                 });
@@ -125,6 +143,37 @@ public final class Database {
                         Message message = doc.toObject(Message.class);
                         onCompleteCallback.callback(message);
                     } else {
+                        Log.d(TAG, task.getException().toString());
+                        onCompleteCallback.callback(null);
+                    }
+                });
+    }
+
+    // Get all messages from user as a list
+    public static void getMessagesByUser(String uid, Callback<List<Message>> onCompleteCallback) {
+        FirebaseFirestore.getInstance().collection("messages").whereEqualTo("uid", uid)
+                .orderBy("timestamp")
+                .get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Log.d(TAG + ": getMessagesByUser", "" + task.getResult().size());
+                List<Message> messages = task.getResult().toObjects(Message.class);
+                onCompleteCallback.callback(messages);
+            } else {
+                Log.d(TAG, task.getException().toString());
+                onCompleteCallback.callback(null);
+            }
+        });
+    }
+
+    // Get all messages from channel as a list
+    public static void getMessagesByChannel(String cid, Callback<List<Message>> onCompleteCallback){
+        FirebaseFirestore.getInstance().collection("messages").whereEqualTo("cid", cid)
+                .orderBy("timestamp").get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<Message> messages = task.getResult().toObjects(Message.class);
+                        onCompleteCallback.callback(messages);
+                    } else {
+                        Log.d(TAG, task.getException().toString());
                         onCompleteCallback.callback(null);
                     }
                 });
@@ -135,11 +184,12 @@ public final class Database {
 
     // Update a user, return null on error.
     public static void updateUser(User user, Callback<User> onCompleteCallback) {
-        FirebaseFirestore.getInstance().collection("users").document(user.getUid()).set(user)
+        FirebaseFirestore.getInstance().collection("users").document(user.getUid()).set(user, SetOptions.merge())
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         onCompleteCallback.callback(user);
                     } else {
+                        Log.d(TAG, task.getException().toString());
                         onCompleteCallback.callback(null);
                     }
                 });
