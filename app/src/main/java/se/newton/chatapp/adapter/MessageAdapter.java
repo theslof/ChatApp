@@ -7,22 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import se.newton.chatapp.databinding.TextMessageBinding;
 import se.newton.chatapp.model.Message;
-import se.newton.chatapp.model.User;
 import se.newton.chatapp.viewmodel.MessageViewModel;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
     private static final String TAG = "MessageAdapter";
+    private List<Message> messages = new ArrayList<>();
 
-    List<Message> messages;
-
-    public MessageAdapter(List<Message> messages) {
-        this.messages = messages;
-        Log.d(TAG, "Created new adapter.");
+    public MessageAdapter() {
     }
 
     public List<Message> getMessages() {

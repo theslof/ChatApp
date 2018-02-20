@@ -1,6 +1,8 @@
 package se.newton.chatapp.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -8,20 +10,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 
 import se.newton.chatapp.R;
 import se.newton.chatapp.adapter.MessageAdapter;
 import se.newton.chatapp.model.Message;
-import se.newton.chatapp.model.User;
 import se.newton.chatapp.service.Database;
 
 public class ChatFragment extends Fragment {
     private static final String TAG = "ChatFragment";
     private String cid;
+    private MessageAdapter adapter = new MessageAdapter();
 
     public ChatFragment() {
         // Required empty public constructor
@@ -31,6 +33,7 @@ public class ChatFragment extends Fragment {
         Log.d(TAG, "Creating a new fragment");
         ChatFragment fragment = new ChatFragment();
         fragment.cid = cid;
+        Database.getMessagesByChannel(cid, fragment.adapter::setMessages);
         return fragment;
     }
 
@@ -50,11 +53,19 @@ public class ChatFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Database.getMessagesByChannel(cid, this::pushMessages);
-    }
+        Activity activity = getActivity();
+        ((RecyclerView) activity.findViewById(R.id.messageList)).setAdapter(adapter);
+        activity.findViewById(R.id.buttonSend).setOnClickListener(view -> {
+            TextView messageText = activity.findViewById(R.id.messageText);
+            if(messageText.getText().length() > 0)
+                Database.createMessage(Message.TYPE_TEXT, messageText.getText().toString(), cid,
+                        message -> {
+                            adapter.getMessages().add(message);
+                            adapter.notifyDataSetChanged();
+                        });
+                messageText.setText("");
+        });
 
-    private void pushMessages(List<Message> messages){
-        ((RecyclerView) getActivity().findViewById(R.id.messageList)).setAdapter(new MessageAdapter(messages));
-    }
 
+    }
 }

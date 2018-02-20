@@ -8,6 +8,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -91,8 +92,7 @@ public final class Database {
         doc.set(message)
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()) {
-                        message.setMid(doc.getId());
-                        doc.set(new HashMap<>().put("mid", doc.getId()), SetOptions.merge());
+                        message.setTimestamp(new Date());
                         onCompleteCallback.callback(message);
                     }else{
                         Log.d(TAG, task.getException().toString());
