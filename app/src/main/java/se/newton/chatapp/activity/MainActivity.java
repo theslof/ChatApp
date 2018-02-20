@@ -3,6 +3,7 @@ package se.newton.chatapp.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,13 +24,16 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import se.newton.chatapp.R;
+import se.newton.chatapp.adapter.MessageAdapter;
 import se.newton.chatapp.model.Channel;
 import se.newton.chatapp.model.Message;
 import se.newton.chatapp.model.User;
 import se.newton.chatapp.service.Database;
+import se.newton.chatapp.viewmodel.MessageViewModel;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -71,6 +75,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
         // ---- Firebase ----
 
         fUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -88,11 +93,20 @@ public class MainActivity extends AppCompatActivity
         Database.getUser(fUser.getUid(), user -> {
             if (user != null && user.getProfileImage() != null) {
                 Log.d(TAG, user.getProfileImage());
-                ImageView v = findViewById(R.id.profileImageView);
-                Glide.with(this).load(user.getProfileImage()).into(v);
+//                ImageView v = findViewById(R.id.profileImageView);
+//                Glide.with(this).load(user.getProfileImage()).into(v);
             }else {
                 Log.d(TAG, "User '" + fUser.getUid() + "' not found!");
             }
+        });
+
+        User user = new User(fUser.getUid());
+        user.setDisplayName(fUser.getDisplayName());
+        user.setProfileImage(fUser.getPhotoUrl().toString());
+
+        Database.getMessagesByUser(fUser.getUid(), messages -> {
+            ((RecyclerView)findViewById(R.id.messageList)).setAdapter(new MessageAdapter(
+                    new HashMap<String, User>(){{put(user.getUid(), user);}}, messages));
         });
     }
 
