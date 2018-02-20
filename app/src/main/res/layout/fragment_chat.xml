@@ -19,6 +19,15 @@
             app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
     </ScrollView>
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/messageBar"
+        />
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/messageBar"
         android:layout_width="match_parent"
