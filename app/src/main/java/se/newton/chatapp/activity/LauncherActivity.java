@@ -63,27 +63,27 @@ public class LauncherActivity extends AppCompatActivity {
             IdpResponse response = IdpResponse.fromResultIntent(data);
 
             if (resultCode == RESULT_OK) {
-                Database.createUser(firebaseAuth.getCurrentUser().getUid(), user -> {
-                    if (user != null) {
-                        FirebaseUser fUser = firebaseAuth.getCurrentUser();
-                        if (fUser.getPhotoUrl() != null)
-                            user.setProfileImage(fUser.getPhotoUrl().toString());
-                        if (fUser.getDisplayName() != null)
-                            user.setDisplayName(fUser.getDisplayName());
-                        Database.updateUser(user, u -> {
-                            launchMainActivity();
-                        });
-                    } else {
-                        Log.d(TAG, "Error creating user " + firebaseAuth.getCurrentUser().getUid());
-                    }
-                });
+                launchMainActivity();
             }
         }
     }
 
     private void launchMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        Database.createUser(firebaseAuth.getCurrentUser().getUid(), user -> {
+            if (user != null) {
+                FirebaseUser fUser = firebaseAuth.getCurrentUser();
+                if (fUser.getPhotoUrl() != null)
+                    user.setProfileImage(fUser.getPhotoUrl().toString());
+                if (fUser.getDisplayName() != null)
+                    user.setDisplayName(fUser.getDisplayName());
+                Database.updateUser(user, u -> {
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                });
+            } else {
+                Log.d(TAG, "Error creating user " + firebaseAuth.getCurrentUser().getUid());
+            }
+        });
     }
 }
