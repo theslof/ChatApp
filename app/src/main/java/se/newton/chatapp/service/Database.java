@@ -30,8 +30,10 @@ public final class Database {
 
     // Creates a new user, or returns existing user if it already exists.
     public static void createUser(String uid, Callback<User> onCompleteCallback) {
+        Log.d(TAG, "Creating user " + uid);
         FirebaseFirestore.getInstance().collection("users").document(uid).get()
                 .addOnCompleteListener(task -> {
+                    Log.d(TAG, task.getResult().getId());
                     if(task.isSuccessful()) {
                         DocumentSnapshot doc = task.getResult();
                         if (doc.exists()) {

@@ -63,6 +63,7 @@ public class LauncherActivity extends AppCompatActivity {
             IdpResponse response = IdpResponse.fromResultIntent(data);
 
             if (resultCode == RESULT_OK) {
+                Log.d(TAG, "Create user");
                 Database.createUser(firebaseAuth.getCurrentUser().getUid(), user -> {
                     if (user != null) {
                         FirebaseUser fUser = firebaseAuth.getCurrentUser();

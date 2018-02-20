@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity
         db = FirebaseFirestore.getInstance();
 
 
-
         // -- Showing all messages in a chat room
 
         ChatFragment chatFragment = ChatFragment.newInstance("MyTestChannel");
@@ -119,6 +118,14 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == R.id.action_logout) {
+            AuthUI.getInstance()
+                    .signOut(this)
+                    .addOnCompleteListener(task -> {
+                        finish();
+                    });
+
         }
 
         return super.onOptionsItemSelected(item);
