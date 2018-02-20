@@ -20,17 +20,24 @@ import se.newton.chatapp.BR;
 import se.newton.chatapp.R;
 import se.newton.chatapp.model.Message;
 import se.newton.chatapp.model.User;
+import se.newton.chatapp.service.Database;
 
 public class MessageViewModel extends BaseObservable {
-    private User user;
+    private User user = new User();
     private Message message;
     private Date timestamp;
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public MessageViewModel(User user, Message message) {
-        this.user = user;
+    public MessageViewModel(Message message) {
         this.message = message;
         this.timestamp = message.getTimestamp();
+        Database.getUser(message.getUid(), this::setUser);
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        notifyPropertyChanged(BR.userName);
+        notifyPropertyChanged(BR.profileImage);
     }
 
     @Bindable

@@ -19,11 +19,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     private static final String TAG = "MessageAdapter";
 
     List<Message> messages;
-    Map<String, User> users;
 
-    public MessageAdapter(Map<String, User> users, List<Message> messages) {
+    public MessageAdapter(List<Message> messages) {
         this.messages = messages;
-        this.users = users;
         Log.d(TAG, "Created new adapter.");
     }
 
@@ -31,8 +29,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         return messages;
     }
 
-    public void setMessages(Map<String, User> users, List<Message> messages) {
-        this.users = users;
+    public void setMessages(List<Message> messages) {
         this.messages = messages;
         notifyDataSetChanged();
     }
@@ -55,7 +52,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Message message = messages.get(position);
-        holder.binding.setViewModel(new MessageViewModel(users.get(message.getUid()), message));
+        holder.binding.setViewModel(new MessageViewModel(message));
         holder.binding.executePendingBindings();
     }
 

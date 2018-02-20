@@ -29,6 +29,7 @@ import java.util.HashMap;
 
 import se.newton.chatapp.R;
 import se.newton.chatapp.adapter.MessageAdapter;
+import se.newton.chatapp.fragment.ChatFragment;
 import se.newton.chatapp.model.Channel;
 import se.newton.chatapp.model.Message;
 import se.newton.chatapp.model.User;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /*
         findViewById(R.id.signOutView).setOnClickListener(View -> {
             AuthUI.getInstance()
                     .signOut(this)
@@ -53,18 +55,10 @@ public class MainActivity extends AppCompatActivity
                     });
 
         });
+        */
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -75,11 +69,20 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
         // ---- Firebase ----
 
         fUser = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
+
+
+
+        // -- Showing all messages in a chat room
+
+        ChatFragment chatFragment = ChatFragment.newInstance("MyTestChannel");
+
+        getFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, chatFragment, "CHAT")
+                .commit();
     }
 
     @Override
@@ -87,27 +90,6 @@ public class MainActivity extends AppCompatActivity
         super.onStart();
 
         // makeDummyData();
-
-
-        // Get the User object for the currently logged in user.
-        Database.getUser(fUser.getUid(), user -> {
-            if (user != null && user.getProfileImage() != null) {
-                Log.d(TAG, user.getProfileImage());
-//                ImageView v = findViewById(R.id.profileImageView);
-//                Glide.with(this).load(user.getProfileImage()).into(v);
-            }else {
-                Log.d(TAG, "User '" + fUser.getUid() + "' not found!");
-            }
-        });
-
-        User user = new User(fUser.getUid());
-        user.setDisplayName(fUser.getDisplayName());
-        user.setProfileImage(fUser.getPhotoUrl().toString());
-
-        Database.getMessagesByUser(fUser.getUid(), messages -> {
-            ((RecyclerView)findViewById(R.id.messageList)).setAdapter(new MessageAdapter(
-                    new HashMap<String, User>(){{put(user.getUid(), user);}}, messages));
-        });
     }
 
     @Override
@@ -263,7 +245,9 @@ public class MainActivity extends AppCompatActivity
         OnSuccessListener<DocumentReference> onSuccessListener = new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference doc) {
-                doc.set(new HashMap<String, String>(){{put("mid", doc.getId());}}, SetOptions.merge());
+                doc.set(new HashMap<String, String>() {{
+                    put("mid", doc.getId());
+                }}, SetOptions.merge());
             }
         };
 
