@@ -90,6 +90,10 @@ public class MessageViewModel extends BaseObservable {
             ConstraintSet set = new ConstraintSet();
             set.clone(view.getContext(), R.layout.message_item_right);
             set.applyTo(view.findViewById(R.id.messageConstraintLayout));
+        }else{
+            ConstraintSet set = new ConstraintSet();
+            set.clone(view.getContext(), R.layout.message_item);
+            set.applyTo(view.findViewById(R.id.messageConstraintLayout));
         }
     }
 }
