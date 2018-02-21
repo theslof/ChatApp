@@ -58,6 +58,7 @@ public class ChatFragment extends Fragment {
 
         Activity activity = getActivity();
         ((RecyclerView) activity.findViewById(R.id.messageList)).setAdapter(adapter);
+
         activity.findViewById(R.id.buttonSend).setOnClickListener(view -> {
             TextView messageText = activity.findViewById(R.id.messageText);
             if(messageText.getText().length() > 0)

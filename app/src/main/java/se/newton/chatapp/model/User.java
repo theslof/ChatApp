@@ -12,6 +12,7 @@ public class User extends BaseObservable{
     private String uid = "";
     private String displayName;
     private String profileImage;
+    private String bio = "";
 
     //List<Channel>
     //List<Users>
@@ -59,4 +60,14 @@ public class User extends BaseObservable{
         this.profileBitmap = profileBitmap;
         notifyPropertyChanged(BR.profileBitmap);
     }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+
 }
