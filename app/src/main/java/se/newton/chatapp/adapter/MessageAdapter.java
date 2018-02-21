@@ -38,16 +38,19 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = MessageItemBinding.inflate(LayoutInflater.from(parent.getContext()),
                 parent, false).getRoot();
-
+        ViewStub stub = v.findViewById(R.id.messageView);
         switch (viewType) {
             case Message.TYPE_TEXT:
-                ViewStub stub = v.findViewById(R.id.messageView);
                 stub.setLayoutResource(R.layout.text_message);
-                stub.inflate();
+                break;
+            case Message.TYPE_IMAGE:
+                stub.setLayoutResource(R.layout.image_message);
                 break;
             default:
-                v = null;
+                stub.setLayoutResource(R.layout.unknown_message);
+                break;
         }
+        stub.inflate();
 
         return new ViewHolder(v);
     }
@@ -55,7 +58,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Message message = messages.get(position);
-        holder.binding.setViewModel(new MessageViewModel(message));
+        MessageViewModel viewModel = new MessageViewModel(message);
+        viewModel.setOrientation(holder.itemView);
+        holder.binding.setViewModel(viewModel);
         holder.binding.executePendingBindings();
     }
 

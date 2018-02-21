@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class Message {
     public static final int TYPE_TEXT = 0;
+    public static final int TYPE_IMAGE = 1;
 
     private String uid;
     private String mid;

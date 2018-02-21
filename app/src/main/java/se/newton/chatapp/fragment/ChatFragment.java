@@ -66,6 +66,14 @@ public class ChatFragment extends Fragment {
                 messageText.setText("");
         });
 
+        activity.findViewById(R.id.buttonAttach).setOnClickListener(view -> {
+            Database.createMessage(Message.TYPE_IMAGE, FirebaseAuth.getInstance().getCurrentUser()
+                    .getPhotoUrl().toString(), cid, message -> {
+                adapter.getMessages().add(message);
+                adapter.notifyDataSetChanged();
+            });
+        });
+
 
     }
 }

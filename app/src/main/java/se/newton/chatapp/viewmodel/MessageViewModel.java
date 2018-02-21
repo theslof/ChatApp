@@ -5,9 +5,14 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
 import android.graphics.Bitmap;
+import android.support.constraint.ConstraintSet;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -61,11 +66,30 @@ public class MessageViewModel extends BaseObservable {
     }
 
     @BindingAdapter("android:profile")
-    public static void loadImage(CircleImageView view, String imageUrl) {
+    public static void loadProfileImage(CircleImageView view, String imageUrl) {
         Glide.with(view.getContext())
                 .load(imageUrl)
                 .placeholder(R.drawable.ic_profile_image_placeholder)
                 .dontAnimate()
                 .into(view);
+    }
+
+    @BindingAdapter("android:image")
+    public static void loadImage(ImageView view, String imageUrl) {
+        Glide.with(view.getContext())
+                .load(imageUrl)
+                .placeholder(R.drawable.ic_profile_image_placeholder)
+//                .dontAnimate()
+                .into(view);
+    }
+
+    public void setOrientation(View view){
+        String fUser = FirebaseAuth.getInstance().getUid();
+        if(message.getUid().equals(fUser)) {
+            Log.d("ViewModel", "Message from you, attempting to shift constraints; uid:" + message.getUid() + ", fuid:" + fUser);
+            ConstraintSet set = new ConstraintSet();
+            set.clone(view.getContext(), R.layout.message_item_right);
+            set.applyTo(view.findViewById(R.id.messageConstraintLayout));
+        }
     }
 }
