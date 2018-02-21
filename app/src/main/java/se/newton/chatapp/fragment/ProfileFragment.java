@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import se.newton.chatapp.R;
 import se.newton.chatapp.viewmodel.ProfileViewModel;
 import se.newton.chatapp.databinding.ProfileFragmentBinding;
@@ -17,8 +20,10 @@ import se.newton.chatapp.databinding.ProfileFragmentBinding;
 
 public class ProfileFragment extends Fragment {
 
-    private ProfileViewModel viewModel= new ProfileViewModel();
+    // Get current user;
+    private String fUserUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+    private ProfileViewModel viewModel= new ProfileViewModel(fUserUid);
 
     public ProfileFragment() {
         // Required empty public constructor
