@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity
         db = FirebaseFirestore.getInstance();
 
 
+
         // -- Showing all messages in a chat room
 
         ChatFragment chatFragment = ChatFragment.newInstance("MyTestChannel");

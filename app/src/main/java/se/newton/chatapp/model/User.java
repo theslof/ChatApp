@@ -7,7 +7,8 @@ public class User {
     private String displayName = "";
     private String profileImage;
     private String bio = "";
-    //List<Channel>
+
+    //ToDo: List<Channel>
     //List<Users>
 
     public User(){}
