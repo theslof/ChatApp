@@ -44,12 +44,12 @@
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/anim/abc_popup_exit.xml"
     },
     {
-        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
-        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable-xxhdpi-v4/abc_textfield_default_mtrl_alpha.9.png"
-    },
-    {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable-xhdpi-v4/abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
+        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable-xxhdpi-v4/abc_textfield_default_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_common_google_signin_btn_text_light_normal_background.9.png.flat",
@@ -116,16 +116,16 @@
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable-hdpi-v4/abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
-        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_star_half_black_16dp.png.flat",
-        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable-mdpi-v4/abc_ic_star_half_black_16dp.png"
+        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_googleg_disabled_color_18.png.flat",
+        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/ae83bdb1a333f0ad855d6f05c568eed4/res/drawable-xhdpi-v4/googleg_disabled_color_18.png"
     },
     {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout-sw600dp-v13_design_layout_snackbar.xml.flat",
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/ed765da4db6704137d982e04b5e38147/res/layout-sw600dp-v13/design_layout_snackbar.xml"
     },
     {
-        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_googleg_disabled_color_18.png.flat",
-        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/ae83bdb1a333f0ad855d6f05c568eed4/res/drawable-xhdpi-v4/googleg_disabled_color_18.png"
+        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_star_half_black_16dp.png.flat",
+        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable-mdpi-v4/abc_ic_star_half_black_16dp.png"
     },
     {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/color_abc_secondary_text_material_light.xml.flat",
@@ -176,12 +176,12 @@
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-3.1.0.aar/5ac4baad0910038b88779295f2bc580d/res/drawable-v21/fui_idp_button_background_facebook.xml"
     },
     {
-        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_list_pressed_holo_light.9.png.flat",
-        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable-xhdpi-v4/abc_list_pressed_holo_light.9.png"
-    },
-    {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/color_common_google_signin_btn_text_light.xml.flat",
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/ae83bdb1a333f0ad855d6f05c568eed4/res/color/common_google_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_list_pressed_holo_light.9.png.flat",
+        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable-xhdpi-v4/abc_list_pressed_holo_light.9.png"
     },
     {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_dark_normal.xml.flat",
@@ -196,20 +196,20 @@
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/color-v23/abc_tint_spinner.xml"
     },
     {
-        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout_abc_activity_chooser_view_list_item.xml.flat",
-        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/layout/abc_activity_chooser_view_list_item.xml"
-    },
-    {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable_abc_spinner_textfield_background_material.xml.flat",
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable/abc_spinner_textfield_background_material.xml"
     },
     {
-        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-v23_abc_control_background_material.xml.flat",
-        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable-v23/abc_control_background_material.xml"
+        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout_abc_activity_chooser_view_list_item.xml.flat",
+        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/layout/abc_activity_chooser_view_list_item.xml"
     },
     {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_common_full_open_on_phone.png.flat",
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/ae83bdb1a333f0ad855d6f05c568eed4/res/drawable-xhdpi-v4/common_full_open_on_phone.png"
+    },
+    {
+        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-v23_abc_control_background_material.xml.flat",
+        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable-v23/abc_control_background_material.xml"
     },
     {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_disabled.xml.flat",
@@ -240,20 +240,20 @@
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable-xxxhdpi-v4/abc_ic_star_black_48dp.png"
     },
     {
-        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable_abc_cab_background_internal_bg.xml.flat",
-        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable/abc_cab_background_internal_bg.xml"
-    },
-    {
-        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/menu_main.xml.flat",
-        "source": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/src/main/res/menu/main.xml"
+        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout_abc_alert_dialog_title_material.xml.flat",
+        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/layout/abc_alert_dialog_title_material.xml"
     },
     {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable_abc_ic_menu_overflow_material.xml.flat",
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable/abc_ic_menu_overflow_material.xml"
     },
     {
-        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout_abc_alert_dialog_title_material.xml.flat",
-        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/layout/abc_alert_dialog_title_material.xml"
+        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/menu_main.xml.flat",
+        "source": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/src/main/res/menu/main.xml"
+    },
+    {
+        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable_abc_cab_background_internal_bg.xml.flat",
+        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable/abc_cab_background_internal_bg.xml"
     },
     {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_dark.xml.flat",
@@ -276,16 +276,16 @@
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/ae83bdb1a333f0ad855d6f05c568eed4/res/drawable-xxhdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png"
     },
     {
-        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable_tooltip_frame_light.xml.flat",
-        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable/tooltip_frame_light.xml"
+        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_switch_track_mtrl_alpha.9.png.flat",
+        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable-xxhdpi-v4/abc_switch_track_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/anim-v21_design_bottom_sheet_slide_in.xml.flat",
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/ed765da4db6704137d982e04b5e38147/res/anim-v21/design_bottom_sheet_slide_in.xml"
     },
     {
-        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_switch_track_mtrl_alpha.9.png.flat",
-        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable-xxhdpi-v4/abc_switch_track_mtrl_alpha.9.png"
+        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable_tooltip_frame_light.xml.flat",
+        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable/tooltip_frame_light.xml"
     },
     {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout_app_bar_main.xml.flat",
@@ -310,6 +310,10 @@
     {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ab_share_pack_mtrl_alpha.9.png.flat",
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable-hdpi-v4/abc_ab_share_pack_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout_message_item.xml.flat",
+        "source": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/src/main/res/layout/message_item.xml"
     },
     {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",
@@ -348,12 +352,12 @@
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/anim/abc_popup_enter.xml"
     },
     {
-        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/color_abc_primary_text_material_light.xml.flat",
-        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/color/abc_primary_text_material_light.xml"
-    },
-    {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_text_select_handle_left_mtrl_light.png.flat",
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable-xxxhdpi-v4/abc_text_select_handle_left_mtrl_light.png"
+    },
+    {
+        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/color_abc_primary_text_material_light.xml.flat",
+        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/color/abc_primary_text_material_light.xml"
     },
     {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
@@ -440,12 +444,12 @@
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/c4abbabf2d29e46a538f356587a89fab/res/drawable-xxhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout_design_navigation_item_subheader.xml.flat",
-        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/ed765da4db6704137d982e04b5e38147/res/layout/design_navigation_item_subheader.xml"
-    },
-    {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout-land_fui_auth_method_picker_layout.xml.flat",
         "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-3.1.0.aar/5ac4baad0910038b88779295f2bc580d/res/layout-land/fui_auth_method_picker_layout.xml"
+    },
+    {
+        "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout_design_navigation_item_subheader.xml.flat",
+        "source": "/Users/theslof/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/ed765da4db6704137d982e04b5e38147/res/layout/design_navigation_item_subheader.xml"
     },
     {
         "merged": "/Users/theslof/Documents/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_cab_background_top_mtrl_alpha.9.png.flat",

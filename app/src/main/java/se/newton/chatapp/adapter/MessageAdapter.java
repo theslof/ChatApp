@@ -6,11 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import se.newton.chatapp.R;
+import se.newton.chatapp.databinding.MessageItemBinding;
 import se.newton.chatapp.databinding.TextMessageBinding;
 import se.newton.chatapp.model.Message;
 import se.newton.chatapp.viewmodel.MessageViewModel;
@@ -33,11 +36,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v;
+        View v = MessageItemBinding.inflate(LayoutInflater.from(parent.getContext()),
+                parent, false).getRoot();
+
         switch (viewType) {
             case Message.TYPE_TEXT:
-                v = TextMessageBinding.inflate(LayoutInflater.from(parent.getContext()),
-                        parent, false).getRoot();
+                ViewStub stub = v.findViewById(R.id.messageView);
+                stub.setLayoutResource(R.layout.text_message);
+                stub.inflate();
                 break;
             default:
                 v = null;
@@ -64,7 +70,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextMessageBinding binding;
+        public MessageItemBinding binding;
 
         public ViewHolder(View itemView) {
             super(itemView);
