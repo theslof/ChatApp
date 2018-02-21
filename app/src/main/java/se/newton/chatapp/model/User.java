@@ -6,6 +6,7 @@ public class User {
     private String uid = "";
     private String displayName = "";
     private String profileImage;
+    private String bio = "";
     //List<Channel>
     //List<Users>
 
@@ -38,5 +39,13 @@ public class User {
 
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 }
