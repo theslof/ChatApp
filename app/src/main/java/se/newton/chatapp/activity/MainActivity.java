@@ -1,6 +1,5 @@
 package se.newton.chatapp.activity;
 
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -168,6 +167,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
+            ProfileFragment profileFragment = ProfileFragment.newInstance();
+
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, profileFragment, "Profile")
+                    .commit();
 
         } else if (id == R.id.nav_send) {
 
