@@ -1,11 +1,14 @@
 package se.newton.chatapp.service;
 
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import se.newton.chatapp.R;
 import se.newton.chatapp.model.User;
 
 public class UserManager {
@@ -29,7 +32,12 @@ public class UserManager {
 
             new Thread(() -> {
                 try {
-                    user.setProfileBitmap(glideManager.load(u.getProfileImage()).asBitmap().into(-1, -1).get());
+                    user.setProfileBitmap(glideManager.asBitmap().load(u.getProfileImage())
+                            .apply(RequestOptions
+                                    .circleCropTransform()
+                                    .placeholder(R.drawable.ic_profile_image_placeholder)
+                            )
+                            .submit(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {

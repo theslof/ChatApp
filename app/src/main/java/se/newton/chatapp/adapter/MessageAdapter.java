@@ -74,7 +74,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     public void onViewRecycled(ViewHolder holder) {
         super.onViewRecycled(holder);
 
-        Glide.clear(holder.itemView);
+        glideManager.clear(holder.itemView);
     }
 
     @Override

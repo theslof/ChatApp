@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/profileImageView"
             android:layout_width="48dp"
             android:layout_height="48dp"
@@ -25,7 +25,8 @@
             android:layout_marginTop="8dp"
             android:profile="@{viewModel.user.profileBitmap}"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="TODO" />
 
         <TextView
             android:id="@+id/textViewUser"

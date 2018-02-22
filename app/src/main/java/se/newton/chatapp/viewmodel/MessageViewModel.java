@@ -1,14 +1,10 @@
 package se.newton.chatapp.viewmodel;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
 import android.graphics.Bitmap;
 import android.support.constraint.ConstraintSet;
-import android.support.v7.widget.RecyclerView;
 import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
@@ -17,20 +13,17 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ThreadPoolExecutor;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import se.newton.chatapp.BR;
 import se.newton.chatapp.R;
 import se.newton.chatapp.model.Message;
 import se.newton.chatapp.model.User;
-import se.newton.chatapp.service.Database;
 import se.newton.chatapp.service.UserManager;
 
 public class MessageViewModel extends BaseObservable {
@@ -69,8 +62,8 @@ public class MessageViewModel extends BaseObservable {
     }
 
     @BindingAdapter("android:profile")
-    public static void loadProfileImage(CircleImageView view, Bitmap image) {
-        if(image == null)
+    public static void loadProfileImage(ImageView view, Bitmap image) {
+        if (image == null)
             view.setImageResource(R.drawable.ic_profile_image_placeholder);
         else
             view.setImageBitmap(image);
@@ -87,21 +80,23 @@ public class MessageViewModel extends BaseObservable {
     public static void loadImage(ImageView view, String imageUrl) {
         Glide.with(view.getContext())
                 .load(imageUrl)
-                .placeholder(R.drawable.ic_profile_image_placeholder)
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.ic_profile_image_placeholder)
+                )
 //                .dontAnimate()
                 .into(view);
     }
 
-    public void setOrientation(View view){
+    public void setOrientation(View view) {
         String fUser = FirebaseAuth.getInstance().getUid();
         ViewGroup viewGroup = (ViewGroup) view;
         TransitionManager.beginDelayedTransition(viewGroup);
-        if(message.getUid().equals(fUser)) {
+        if (message.getUid().equals(fUser)) {
             Log.d("ViewModel", "Message from you, attempting to shift constraints; uid:" + message.getUid() + ", fuid:" + fUser);
             ConstraintSet set = new ConstraintSet();
             set.clone(viewGroup.getContext(), R.layout.message_item_right);
             set.applyTo(viewGroup.findViewById(R.id.messageConstraintLayout));
-        }else{
+        } else {
             ConstraintSet set = new ConstraintSet();
             set.clone(viewGroup.getContext(), R.layout.message_item);
             set.applyTo(viewGroup.findViewById(R.id.messageConstraintLayout));
