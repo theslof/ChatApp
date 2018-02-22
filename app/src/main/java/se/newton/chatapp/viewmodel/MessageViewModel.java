@@ -1,5 +1,7 @@
 package se.newton.chatapp.viewmodel;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.DateFormat;
@@ -31,15 +34,17 @@ import se.newton.chatapp.service.Database;
 import se.newton.chatapp.service.UserManager;
 
 public class MessageViewModel extends BaseObservable {
-    private User user = new User();
+    private User user;
     private Message message;
     private Date timestamp;
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private final RequestManager glideManager;
 
-    public MessageViewModel(Message message) {
+    public MessageViewModel(RequestManager glideManager, Message message) {
         this.message = message;
         this.timestamp = message.getTimestamp();
-        user = UserManager.getUser(message.getUid());
+        user = UserManager.getUser(glideManager, message.getUid());
+        this.glideManager = glideManager;
 //        Database.getUser(message.getUid(), this::setUser);
     }
 

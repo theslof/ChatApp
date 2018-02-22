@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -23,7 +24,7 @@ import se.newton.chatapp.service.Database;
 public class ChatFragment extends Fragment {
     private static final String TAG = "ChatFragment";
     private String cid;
-    private MessageAdapter adapter = new MessageAdapter();
+    private MessageAdapter adapter;
 
     public ChatFragment() {
         // Required empty public constructor
@@ -33,7 +34,6 @@ public class ChatFragment extends Fragment {
         Log.d(TAG, "Creating a new fragment");
         ChatFragment fragment = new ChatFragment();
         fragment.cid = cid;
-        Database.getMessagesByChannel(cid, fragment.adapter::setMessages);
         return fragment;
     }
 
@@ -52,6 +52,9 @@ public class ChatFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        adapter = new MessageAdapter(Glide.with(this));
+        Database.getMessagesByChannel(cid, adapter::setMessages);
 
         Activity activity = getActivity();
         ((RecyclerView) activity.findViewById(R.id.messageList)).setAdapter(adapter);

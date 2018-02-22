@@ -1,5 +1,6 @@
 package se.newton.chatapp.adapter;
 
+import android.app.Fragment;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.ViewStub;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +24,11 @@ import se.newton.chatapp.viewmodel.MessageViewModel;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
     private static final String TAG = "MessageAdapter";
+    private final RequestManager glideManager;
     private List<Message> messages = new ArrayList<>();
 
-    public MessageAdapter() {
+    public MessageAdapter(RequestManager glideManager) {
+        this.glideManager = glideManager;
     }
 
     public List<Message> getMessages() {
@@ -60,7 +64,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Message message = messages.get(position);
-        MessageViewModel viewModel = new MessageViewModel(message);
+        MessageViewModel viewModel = new MessageViewModel(glideManager, message);
         viewModel.setOrientation(holder.itemView);
         holder.binding.setViewModel(viewModel);
         holder.binding.executePendingBindings();
