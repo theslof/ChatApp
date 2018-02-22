@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +64,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         viewModel.setOrientation(holder.itemView);
         holder.binding.setViewModel(viewModel);
         holder.binding.executePendingBindings();
+    }
+
+    @Override
+    public void onViewRecycled(ViewHolder holder) {
+        super.onViewRecycled(holder);
+
+        Glide.clear(holder.itemView);
     }
 
     @Override
