@@ -1,5 +1,6 @@
 package se.newton.chatapp.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -30,6 +31,7 @@ import java.util.HashMap;
 import se.newton.chatapp.R;
 import se.newton.chatapp.adapter.MessageAdapter;
 import se.newton.chatapp.fragment.ChatFragment;
+import se.newton.chatapp.fragment.ProfileFragment;
 import se.newton.chatapp.model.Channel;
 import se.newton.chatapp.model.Message;
 import se.newton.chatapp.model.User;
@@ -147,6 +149,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
+            ProfileFragment profileFragment = ProfileFragment.newInstance();
+
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, profileFragment, "Profile")
+                    .commit();
 
         } else if (id == R.id.nav_send) {
 

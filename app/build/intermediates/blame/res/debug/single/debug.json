@@ -1,15 +1,15 @@
 [
     {
-        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-v21_abc_action_bar_item_background_material.xml.flat",
-        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-v21/abc_action_bar_item_background_material.xml"
+        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/anim-v21_design_bottom_sheet_slide_out.xml.flat",
+        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/2c590d004b6fbdc7fcdd3909de1caa7d/res/anim-v21/design_bottom_sheet_slide_out.xml"
     },
     {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_common_full_open_on_phone.png.flat",
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/13440ec472ba92945c11f25248645608/res/drawable-xhdpi-v4/common_full_open_on_phone.png"
     },
     {
-        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/anim-v21_design_bottom_sheet_slide_out.xml.flat",
-        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/design-26.1.0.aar/2c590d004b6fbdc7fcdd3909de1caa7d/res/anim-v21/design_bottom_sheet_slide_out.xml"
+        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-v21_abc_action_bar_item_background_material.xml.flat",
+        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-v21/abc_action_bar_item_background_material.xml"
     },
     {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_ic_star_half_black_36dp.png.flat",
@@ -36,20 +36,20 @@
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/13440ec472ba92945c11f25248645608/res/drawable-mdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png"
     },
     {
-        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout_abc_screen_simple.xml.flat",
-        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/layout/abc_screen_simple.xml"
-    },
-    {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout_abc_list_menu_item_checkbox.xml.flat",
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/layout/abc_list_menu_item_checkbox.xml"
     },
     {
-        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
-        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
+        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout_abc_screen_simple.xml.flat",
+        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/layout/abc_screen_simple.xml"
     },
     {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_menu_paste_mtrl_am_alpha.png.flat",
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-xxhdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_scrubber_control_to_pressed_mtrl_005.png.flat",
+        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-xxhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
@@ -68,24 +68,24 @@
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-hdpi-v4/abc_list_selector_disabled_holo_light.9.png"
     },
     {
-        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-ldrtl-mdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
-        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-ldrtl-mdpi-v17/abc_spinner_mtrl_am_alpha.9.png"
-    },
-    {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable_abc_list_selector_background_transition_holo_dark.xml.flat",
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-ldrtl-mdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
+        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-ldrtl-mdpi-v17/abc_spinner_mtrl_am_alpha.9.png"
     },
     {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-xxhdpi-v4/abc_ic_menu_share_mtrl_alpha.png"
     },
     {
-        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
-        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-mdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png"
-    },
-    {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-hdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
+        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-mdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png"
     },
     {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
@@ -100,12 +100,12 @@
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-hdpi-v4/abc_btn_radio_to_on_mtrl_000.png"
     },
     {
-        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_menu_hardkey_panel_mtrl_mult.9.png.flat",
-        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-xxhdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png"
-    },
-    {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_ic_menu_selectall_mtrl_alpha.png.flat",
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-xhdpi-v4/abc_ic_menu_selectall_mtrl_alpha.png"
+    },
+    {
+        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_menu_hardkey_panel_mtrl_mult.9.png.flat",
+        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-xxhdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png"
     },
     {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_text_dark.xml.flat",
@@ -140,12 +140,12 @@
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/8fc4de49535ba91ce88dc1e9539f9480/res/drawable-hdpi-v4/notify_panel_notification_icon_bg.png"
     },
     {
-        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-v21_fui_idp_button_background_phone.xml.flat",
-        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-3.1.0.aar/85497f2fb9fede877c312a7537a69d19/res/drawable-v21/fui_idp_button_background_phone.xml"
-    },
-    {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout_fui_idp_button_facebook.xml.flat",
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-3.1.0.aar/85497f2fb9fede877c312a7537a69d19/res/layout/fui_idp_button_facebook.xml"
+    },
+    {
+        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-v21_fui_idp_button_background_phone.xml.flat",
+        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-3.1.0.aar/85497f2fb9fede877c312a7537a69d19/res/drawable-v21/fui_idp_button_background_phone.xml"
     },
     {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
@@ -156,12 +156,12 @@
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-mdpi-v4/abc_ic_star_half_black_48dp.png"
     },
     {
-        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout_fui_phone_layout.xml.flat",
-        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-3.1.0.aar/85497f2fb9fede877c312a7537a69d19/res/layout/fui_phone_layout.xml"
-    },
-    {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_common_google_signin_btn_text_light_normal_background.9.png.flat",
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/13440ec472ba92945c11f25248645608/res/drawable-xxhdpi-v4/common_google_signin_btn_text_light_normal_background.9.png"
+    },
+    {
+        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout_fui_phone_layout.xml.flat",
+        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-3.1.0.aar/85497f2fb9fede877c312a7537a69d19/res/layout/fui_phone_layout.xml"
     },
     {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/color-v23_abc_color_highlight_material.xml.flat",
@@ -188,12 +188,12 @@
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/color-v23/abc_tint_seek_thumb.xml"
     },
     {
-        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-ldrtl-xhdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
-        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-ldrtl-xhdpi-v17/abc_spinner_mtrl_am_alpha.9.png"
-    },
-    {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable_fui_ic_phone_white_24dp.xml.flat",
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-3.1.0.aar/85497f2fb9fede877c312a7537a69d19/res/drawable/fui_ic_phone_white_24dp.xml"
+    },
+    {
+        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-ldrtl-xhdpi-v17_abc_spinner_mtrl_am_alpha.9.png.flat",
+        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-ldrtl-xhdpi-v17/abc_spinner_mtrl_am_alpha.9.png"
     },
     {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_list_pressed_holo_dark.9.png.flat",
@@ -328,32 +328,32 @@
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/layout/abc_screen_toolbar.xml"
     },
     {
-        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout_fui_activity_register_email.xml.flat",
-        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-3.1.0.aar/85497f2fb9fede877c312a7537a69d19/res/layout/fui_activity_register_email.xml"
-    },
-    {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/color_abc_search_url_text.xml.flat",
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/color/abc_search_url_text.xml"
+    },
+    {
+        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/layout_fui_activity_register_email.xml.flat",
+        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/firebase-ui-auth-3.1.0.aar/85497f2fb9fede877c312a7537a69d19/res/layout/fui_activity_register_email.xml"
     },
     {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable_abc_seekbar_thumb_material.xml.flat",
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable/abc_seekbar_thumb_material.xml"
     },
     {
-        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notify_panel_notification_icon_bg.png.flat",
-        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/8fc4de49535ba91ce88dc1e9539f9480/res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png"
-    },
-    {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_common_google_signin_btn_text_dark_normal_background.9.png.flat",
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/play-services-base-11.8.0.aar/13440ec472ba92945c11f25248645608/res/drawable-xxhdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
     },
     {
-        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notification_bg_normal_pressed.9.png.flat",
-        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/8fc4de49535ba91ce88dc1e9539f9480/res/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png"
+        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notify_panel_notification_icon_bg.png.flat",
+        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/8fc4de49535ba91ce88dc1e9539f9480/res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png"
     },
     {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_btn_switch_to_on_mtrl_00012.9.png.flat",
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-xxhdpi-v4/abc_btn_switch_to_on_mtrl_00012.9.png"
+    },
+    {
+        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_notification_bg_normal_pressed.9.png.flat",
+        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/support-compat-26.1.0.aar/8fc4de49535ba91ce88dc1e9539f9480/res/drawable-xhdpi-v4/notification_bg_normal_pressed.9.png"
     },
     {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ab_share_pack_mtrl_alpha.9.png.flat",
@@ -404,16 +404,16 @@
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-xxxhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png"
     },
     {
-        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable_abc_btn_default_mtrl_shape.xml.flat",
-        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable/abc_btn_default_mtrl_shape.xml"
+        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable_abc_list_selector_holo_light.xml.flat",
+        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable/abc_list_selector_holo_light.xml"
     },
     {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_list_divider_mtrl_alpha.9.png.flat",
         "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable-hdpi-v4/abc_list_divider_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable_abc_list_selector_holo_light.xml.flat",
-        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable/abc_list_selector_holo_light.xml"
+        "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable_abc_btn_default_mtrl_shape.xml.flat",
+        "source": "/Users/fr9b/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.1.0.aar/8560980a0d1622ca1ed6b929ddda4d7a/res/drawable/abc_btn_default_mtrl_shape.xml"
     },
     {
         "merged": "/Users/fr9b/AndroidStudioProjects/ChatApp/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_scrubber_primary_mtrl_alpha.9.png.flat",
