@@ -1,5 +1,6 @@
 package se.newton.chatapp.activity;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -12,10 +13,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,6 +35,8 @@ import java.util.HashMap;
 import se.newton.chatapp.R;
 import se.newton.chatapp.adapter.MessageAdapter;
 import se.newton.chatapp.fragment.ChatFragment;
+import se.newton.chatapp.fragment.First;
+import se.newton.chatapp.fragment.Second;
 import se.newton.chatapp.model.Channel;
 import se.newton.chatapp.model.Message;
 import se.newton.chatapp.model.User;
@@ -68,6 +75,28 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        Uri personPhoto = null;
+        if (acct != null) {
+            String personName = acct.getDisplayName();
+            String personGivenName = acct.getGivenName();
+            String personFamilyName = acct.getFamilyName();
+            String personEmail = acct.getEmail();
+            String personId = acct.getId();
+            personPhoto = acct.getPhotoUrl();
+        }
+
+        View hView = navigationView.getHeaderView(0);
+        TextView nav_user = (TextView) hView.findViewById(R.id.nameView);
+        nav_user.setText(acct.getDisplayName());
+        TextView nav_mail = (TextView) hView.findViewById(R.id.mailView);
+        nav_mail.setText(acct.getEmail());
+        ImageView nav_img = (ImageView) hView.findViewById(R.id.imageView);
+        nav_img.setImageURI(acct.getPhotoUrl());
+        Glide.with(this).load(personPhoto).into(nav_img);
+
+
 
         // ---- Firebase ----
 
@@ -137,8 +166,9 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_channel_one) {
             // Handle the camera action
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {

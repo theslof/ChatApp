@@ -8,4 +8,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="AndroidBlaBla">Android Studio</string>
+    <string name="AndroidMailBlaBLa">android.studio@android.com</string>
+    <string name="LoggedInBLABLA">Profile Picture For Logged In User</string>
 </resources>
