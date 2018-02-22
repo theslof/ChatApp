@@ -1,6 +1,10 @@
 package se.newton.chatapp.activity;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v4.widget.CircularProgressDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -18,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -32,6 +37,7 @@ import com.google.firebase.firestore.SetOptions;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import se.newton.chatapp.R;
 import se.newton.chatapp.adapter.MessageAdapter;
 import se.newton.chatapp.fragment.ChatFragment;
@@ -40,6 +46,7 @@ import se.newton.chatapp.fragment.Second;
 import se.newton.chatapp.model.Channel;
 import se.newton.chatapp.model.Message;
 import se.newton.chatapp.model.User;
+import se.newton.chatapp.other.CircleTransform;
 import se.newton.chatapp.service.Database;
 import se.newton.chatapp.viewmodel.MessageViewModel;
 
@@ -94,8 +101,10 @@ public class MainActivity extends AppCompatActivity
         nav_mail.setText(acct.getEmail());
         ImageView nav_img = (ImageView) hView.findViewById(R.id.imageView);
         nav_img.setImageURI(acct.getPhotoUrl());
-        Glide.with(this).load(personPhoto).into(nav_img);
-
+        Glide.with(this)
+                .load(personPhoto)
+                .bitmapTransform(new CircleTransform(this))
+                .into(nav_img);
 
 
         // ---- Firebase ----
