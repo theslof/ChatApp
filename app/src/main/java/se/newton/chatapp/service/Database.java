@@ -9,7 +9,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import se.newton.chatapp.model.Channel;

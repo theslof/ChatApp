@@ -10,7 +10,7 @@ import se.newton.chatapp.BR;
 
 public class User extends BaseObservable{
     private String uid = "";
-    private String displayName = "Loading";
+    private String displayName;
     private String profileImage;
 
     //List<Channel>
