@@ -96,15 +96,13 @@ public class LauncherActivity extends AppCompatActivity {
                 if (user.getDisplayName() == null)
                     user.setDisplayName(fUser.getDisplayName());
                 Database.updateUser(user, u -> {
-                    launchMainActivity();
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 });
             } else {
                 Log.d(TAG, "Error creating user " + firebaseAuth.getCurrentUser().getUid());
             }
         });
-
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
     }
 }
