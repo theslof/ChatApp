@@ -1,16 +1,7 @@
 package se.newton.chatapp.service;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
