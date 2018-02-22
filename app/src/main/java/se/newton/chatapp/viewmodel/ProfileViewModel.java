@@ -56,4 +56,9 @@ public class ProfileViewModel extends BaseObservable {
                 .into(view);
     }
 
+    public void startPrivateChannelBtn() {
+        // Start new chat channel with user
+    }
+
 }
+
