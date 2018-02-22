@@ -73,34 +73,36 @@ public class LauncherActivity extends AppCompatActivity {
 
             // If FirebaseUI login activity completed successfully
             if (resultCode == RESULT_OK) {
-                Log.d(TAG, "Create user");
-                FirebaseUser fUser = firebaseAuth.getCurrentUser();
-
-                // Tell the database to create a user with the same UserID as our current session,
-                // or just return it if it already exists. We supply a callback (here a lambda
-                // expression) that executes when the Database call is finished.
-                Database.createUser(fUser.getUid(), user -> {
-
-                    // If the Database call failed it returns null, so we check for that
-                    if (user != null) {
-                        // If the User object is missing a profile image and display name, copy
-                        // them from the Firebase account
-                        if (user.getProfileImage() == null)
-                            user.setProfileImage(fUser.getPhotoUrl().toString());
-                        if (user.getDisplayName() == null)
-                            user.setDisplayName(fUser.getDisplayName());
-                        Database.updateUser(user, u -> {
-                            launchMainActivity();
-                        });
-                    } else {
-                        Log.d(TAG, "Error creating user " + firebaseAuth.getCurrentUser().getUid());
-                    }
-                });
+                launchMainActivity();
             }
         }
     }
 
     private void launchMainActivity() {
+        Log.d(TAG, "Create user");
+        FirebaseUser fUser = firebaseAuth.getCurrentUser();
+
+        // Tell the database to create a user with the same UserID as our current session,
+        // or just return it if it already exists. We supply a callback (here a lambda
+        // expression) that executes when the Database call is finished.
+        Database.createUser(fUser.getUid(), user -> {
+
+            // If the Database call failed it returns null, so we check for that
+            if (user != null) {
+                // If the User object is missing a profile image and display name, copy
+                // them from the Firebase account
+                if (user.getProfileImage() == null)
+                    user.setProfileImage(fUser.getPhotoUrl().toString());
+                if (user.getDisplayName() == null)
+                    user.setDisplayName(fUser.getDisplayName());
+                Database.updateUser(user, u -> {
+                    launchMainActivity();
+                });
+            } else {
+                Log.d(TAG, "Error creating user " + firebaseAuth.getCurrentUser().getUid());
+            }
+        });
+
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
