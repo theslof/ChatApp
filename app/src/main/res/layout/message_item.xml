@@ -23,7 +23,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:profile="@{viewModel.profileImage}"
+            android:profile="@{viewModel.user.profileBitmap}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -35,7 +35,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="@{viewModel.userName}"
+            android:text="@{viewModel.user.displayName}"
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/profileImageView"
@@ -52,7 +52,6 @@
             app:cardCornerRadius="12dp"
             app:cardElevation="3dp"
             app:contentPadding="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/profileImageView"
             app:layout_constraintTop_toBottomOf="@+id/textViewUser">
 
@@ -69,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@{viewModel.timestamp}"
-            app:layout_constraintEnd_toEndOf="@+id/messageCard"
+            app:layout_constraintStart_toStartOf="@+id/messageCard"
             app:layout_constraintTop_toBottomOf="@+id/messageCard"
             tools:text="TIMESTAMP" />
     </android.support.constraint.ConstraintLayout>

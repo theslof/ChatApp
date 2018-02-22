@@ -16,7 +16,7 @@
             android:id="@+id/messageList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:stackFromEnd="true"
+            app:stackFromEnd="false"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
     </ScrollView>
 
