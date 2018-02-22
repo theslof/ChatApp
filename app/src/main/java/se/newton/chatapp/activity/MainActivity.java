@@ -1,5 +1,6 @@
 package se.newton.chatapp.activity;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -11,8 +12,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -58,6 +66,27 @@ public class MainActivity extends AppCompatActivity
 
         fUser = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        Uri personPhoto = null;
+        if (acct != null) {
+            String personName = acct.getDisplayName();
+            String personGivenName = acct.getGivenName();
+            String personFamilyName = acct.getFamilyName();
+            String personEmail = acct.getEmail();
+            String personId = acct.getId();
+            personPhoto = acct.getPhotoUrl();
+        }
+
+        View hView = navigationView.getHeaderView(0);
+        TextView nav_user = (TextView) hView.findViewById(R.id.nameView);
+        nav_user.setText(acct.getDisplayName());
+        TextView nav_mail = (TextView) hView.findViewById(R.id.mailView);
+        nav_mail.setText(acct.getEmail());
+        ImageView nav_img = (ImageView) hView.findViewById(R.id.imageView);
+        nav_img.setImageURI(acct.getPhotoUrl());
+
+        Glide.with(this).load(personPhoto).apply(RequestOptions.circleCropTransform()).into(nav_img);
 
 
         // -- Showing all messages in a chat room --
@@ -121,7 +150,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_channel_one) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
