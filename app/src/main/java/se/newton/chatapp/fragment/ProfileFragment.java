@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -25,7 +23,7 @@ import se.newton.chatapp.databinding.ProfileFragmentBinding;
 public class ProfileFragment extends Fragment {
 
     private String fUserUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    private ProfileViewModel viewModel;
+    private ProfileViewModel viewModel= new ProfileViewModel(fUserUid);
     private static final String TAG = "ProfileFragment";
 
     public ProfileFragment() {
@@ -46,9 +44,6 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        viewModel = new ProfileViewModel(Glide.with(this), fUserUid);
-
         // Inflate the layout for this fragment
         ProfileFragmentBinding binding = DataBindingUtil.inflate(inflater,R.layout.profile_fragment, container, false);
         binding.setViewModel(viewModel);

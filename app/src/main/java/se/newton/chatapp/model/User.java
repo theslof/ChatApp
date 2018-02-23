@@ -1,22 +1,15 @@
 package se.newton.chatapp.model;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
-import android.graphics.Bitmap;
+import android.net.Uri;
 
-import com.google.firebase.firestore.Exclude;
-
-import se.newton.chatapp.BR;
-
-public class User extends BaseObservable{
+public class User {
     private String uid = "";
-    private String displayName;
+    private String displayName = "";
     private String profileImage;
     private String bio = "";
 
-    //List<Channel>
+    //ToDo: List<Channel>
     //List<Users>
-    @Exclude private Bitmap profileBitmap;
 
     public User(){}
 
@@ -33,14 +26,12 @@ public class User extends BaseObservable{
         this.uid = uid;
     }
 
-    @Bindable
     public String getDisplayName() {
         return displayName;
     }
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
-        notifyPropertyChanged(BR.displayName);
     }
 
     public String getProfileImage() {
@@ -51,16 +42,6 @@ public class User extends BaseObservable{
         this.profileImage = profileImage;
     }
 
-    @Bindable
-    public Bitmap getProfileBitmap() {
-        return profileBitmap;
-    }
-
-    public void setProfileBitmap(Bitmap profileBitmap) {
-        this.profileBitmap = profileBitmap;
-        notifyPropertyChanged(BR.profileBitmap);
-    }
-
     public String getBio() {
         return bio;
     }
@@ -68,6 +49,4 @@ public class User extends BaseObservable{
     public void setBio(String bio) {
         this.bio = bio;
     }
-
-
 }
