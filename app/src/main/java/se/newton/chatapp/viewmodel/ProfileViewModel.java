@@ -32,15 +32,6 @@ public class ProfileViewModel extends BaseObservable {
         notifyPropertyChanged(BR.userBio);
     }
 
-    @Bindable
-    public String getUserName() {
-        return user.getDisplayName();
-    }
-
-    @Bindable
-    public String getProfileImage() {
-        return user.getProfileImage();
-    }
 
     @Bindable
     public String getUserBio() {
