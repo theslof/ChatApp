@@ -29,16 +29,15 @@ import se.newton.chatapp.service.UserManager;
 public class MessageViewModel extends BaseObservable {
     private User user;
     private Message message;
-    private Date timestamp;
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private final RequestManager glideManager;
 
     public MessageViewModel(RequestManager glideManager, Message message) {
         this.message = message;
-        this.timestamp = message.getTimestamp();
+        if(message.getTimestamp() == null)
+            message.setTimestamp(new Date());
         user = UserManager.getUser(glideManager, message.getUid());
         this.glideManager = glideManager;
-//        Database.getUser(message.getUid(), this::setUser);
     }
 
     public void setUser(User user) {
@@ -58,7 +57,7 @@ public class MessageViewModel extends BaseObservable {
 
     @Bindable
     public String getTimestamp() {
-        return dateFormat.format(timestamp);
+        return dateFormat.format(message.getTimestamp());
     }
 
     @BindingAdapter("android:profile")
@@ -67,13 +66,6 @@ public class MessageViewModel extends BaseObservable {
             view.setImageResource(R.drawable.ic_profile_image_placeholder);
         else
             view.setImageBitmap(image);
-/*
-        Glide.with(view.getContext())
-                .load(image)
-                .placeholder(R.drawable.ic_profile_image_placeholder)
-                .dontAnimate()
-                .into(view);
-*/
     }
 
     @BindingAdapter("android:image")
@@ -83,7 +75,6 @@ public class MessageViewModel extends BaseObservable {
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.ic_profile_image_placeholder)
                 )
-//                .dontAnimate()
                 .into(view);
     }
 

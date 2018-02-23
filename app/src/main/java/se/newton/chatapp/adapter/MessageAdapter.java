@@ -2,6 +2,7 @@ package se.newton.chatapp.adapter;
 
 import android.app.Fragment;
 import android.databinding.DataBindingUtil;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,9 @@ import android.view.ViewStub;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,15 +26,17 @@ import se.newton.chatapp.databinding.TextMessageBinding;
 import se.newton.chatapp.model.Message;
 import se.newton.chatapp.viewmodel.MessageViewModel;
 
-public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
+public class MessageAdapter extends FirestoreRecyclerAdapter<Message, MessageAdapter.ViewHolder> {
     private static final String TAG = "MessageAdapter";
     private final RequestManager glideManager;
-    private List<Message> messages = new ArrayList<>();
+//    private List<Message> messages = new ArrayList<>();
 
-    public MessageAdapter(RequestManager glideManager) {
+    public MessageAdapter(FirestoreRecyclerOptions<Message> options, RequestManager glideManager) {
+        super(options);
         this.glideManager = glideManager;
     }
 
+    /*
     public List<Message> getMessages() {
         return messages;
     }
@@ -39,6 +45,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         this.messages = messages;
         notifyDataSetChanged();
     }
+    */
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -62,8 +69,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Message message = messages.get(position);
+    public void onBindViewHolder(ViewHolder holder, int position, @NonNull Message message) {
+//        Message message = messages.get(position);
         MessageViewModel viewModel = new MessageViewModel(glideManager, message);
         viewModel.setOrientation(holder.itemView);
         holder.binding.setViewModel(viewModel);
@@ -78,13 +85,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     }
 
     @Override
-    public int getItemCount() {
-        return messages.size();
+    public void onError(@NonNull FirebaseFirestoreException e) {
+        Log.e("error", e.getMessage());
     }
 
     @Override
     public int getItemViewType(int position) {
-        return messages.get(position).getMessageType();
+        return getItem(position).getMessageType();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
