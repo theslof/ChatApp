@@ -13,8 +13,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.Query;
 
 import se.newton.chatapp.R;
 import se.newton.chatapp.adapter.MessageAdapter;
@@ -53,30 +55,32 @@ public class ChatFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        adapter = new MessageAdapter(Glide.with(this));
-        Database.getMessagesByChannel(cid, adapter::setMessages);
+        adapter = new MessageAdapter(Database.getMessagesByChannelOption(cid), Glide.with(this));
 
         Activity activity = getActivity();
         ((RecyclerView) activity.findViewById(R.id.messageList)).setAdapter(adapter);
         activity.findViewById(R.id.buttonSend).setOnClickListener(view -> {
             TextView messageText = activity.findViewById(R.id.messageText);
             if(messageText.getText().length() > 0)
-                Database.createMessage(Message.TYPE_TEXT, messageText.getText().toString(), cid,
-                        message -> {
-                            adapter.getMessages().add(message);
-                            adapter.notifyDataSetChanged();
-                        });
+                Database.createMessage(Message.TYPE_TEXT, messageText.getText().toString(), cid, m -> {});
                 messageText.setText("");
         });
 
         activity.findViewById(R.id.buttonAttach).setOnClickListener(view -> {
             Database.createMessage(Message.TYPE_IMAGE, FirebaseAuth.getInstance().getCurrentUser()
-                    .getPhotoUrl().toString(), cid, message -> {
-                adapter.getMessages().add(message);
-                adapter.notifyDataSetChanged();
-            });
+                    .getPhotoUrl().toString(), cid, m -> {});
         });
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 }

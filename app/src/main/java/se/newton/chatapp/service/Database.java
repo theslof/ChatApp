@@ -2,10 +2,12 @@ package se.newton.chatapp.service;
 
 import android.util.Log;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.Date;
@@ -17,6 +19,7 @@ import se.newton.chatapp.model.User;
 
 public final class Database {
     private static final String TAG = "Database";
+    private static final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private Database() {
     }
@@ -30,10 +33,10 @@ public final class Database {
     // Creates a new user, or returns existing user if it already exists.
     public static void createUser(String uid, Callback<User> onCompleteCallback) {
         Log.d(TAG, "Creating user " + uid);
-        FirebaseFirestore.getInstance().collection("users").document(uid).get()
+        db.collection("users").document(uid).get()
                 .addOnCompleteListener(task -> {
                     Log.d(TAG, task.getResult().getId());
-                    if(task.isSuccessful()) {
+                    if (task.isSuccessful()) {
                         DocumentSnapshot doc = task.getResult();
                         if (doc.exists()) {
                             Log.d(TAG, "User '" + uid + "' already exists");
@@ -49,7 +52,7 @@ public final class Database {
                                 }
                             });
                         }
-                    }else{
+                    } else {
                         Log.d(TAG, task.getException().toString());
                         onCompleteCallback.callback(null);
                     }
@@ -58,9 +61,9 @@ public final class Database {
 
     // Creates a new channel, or returns existing channel if it already exists.
     public static void createChannel(String cid, Callback<Channel> onCompleteCallback) {
-        FirebaseFirestore.getInstance().collection("channels").document(cid).get()
+        db.collection("channels").document(cid).get()
                 .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()) {
+                    if (task.isSuccessful()) {
                         DocumentSnapshot doc = task.getResult();
                         if (doc.exists()) {
                             onCompleteCallback.callback(doc.toObject(Channel.class));
@@ -75,7 +78,7 @@ public final class Database {
                                 }
                             });
                         }
-                    }else{
+                    } else {
                         Log.d(TAG, task.getException().toString());
                         onCompleteCallback.callback(null);
                     }
@@ -85,17 +88,17 @@ public final class Database {
 
     // Creates a new message and returns a Message object
     public static void createMessage(int messageType, String data, String cid, Callback<Message> onCompleteCallback) {
-        DocumentReference doc = FirebaseFirestore.getInstance().collection("messages").document();
+        DocumentReference doc = db.collection("messages").document();
         Message message = new Message(messageType, data);
         message.setCid(cid);
         message.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
         message.setMid(doc.getId());
         doc.set(message)
                 .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()) {
+                    if (task.isSuccessful()) {
                         message.setTimestamp(new Date());
                         onCompleteCallback.callback(message);
-                    }else{
+                    } else {
                         Log.d(TAG, task.getException().toString());
                         onCompleteCallback.callback(null);
                     }
@@ -107,7 +110,7 @@ public final class Database {
 
     // Get existing user from Firestore, returns null on error
     public static void getUser(String uid, Callback<User> onCompleteCallback) {
-        FirebaseFirestore.getInstance().collection("users").document(uid).get()
+        db.collection("users").document(uid).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult().exists()) {
                         DocumentSnapshot doc = task.getResult();
@@ -122,7 +125,7 @@ public final class Database {
 
     // Get existing channel from Firestore, returns null on error
     public static void getChannel(String cid, Callback<Channel> onCompleteCallback) {
-        FirebaseFirestore.getInstance().collection("channels").document(cid).get()
+        db.collection("channels").document(cid).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult().exists()) {
                         DocumentSnapshot doc = task.getResult();
@@ -137,7 +140,7 @@ public final class Database {
 
     // Get existing message from Firestore, returns null on error
     public static void getMessage(String mid, Callback<Message> onCompleteCallback) {
-        FirebaseFirestore.getInstance().collection("messages").document(mid).get()
+        db.collection("messages").document(mid).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult().exists()) {
                         DocumentSnapshot doc = task.getResult();
@@ -152,7 +155,7 @@ public final class Database {
 
     // Get all messages from user as a list
     public static void getMessagesByUser(String uid, Callback<List<Message>> onCompleteCallback) {
-        FirebaseFirestore.getInstance().collection("messages").whereEqualTo("uid", uid)
+        db.collection("messages").whereEqualTo("uid", uid)
                 .orderBy("timestamp")
                 .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -167,17 +170,27 @@ public final class Database {
     }
 
     // Get all messages from channel as a list
-    public static void getMessagesByChannel(String cid, Callback<List<Message>> onCompleteCallback){
-        FirebaseFirestore.getInstance().collection("messages").whereEqualTo("cid", cid)
+    public static void getMessagesByChannel(String cid, Callback<List<Message>> onCompleteCallback) {
+        db.collection("messages").whereEqualTo("cid", cid)
                 .orderBy("timestamp").get().addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        List<Message> messages = task.getResult().toObjects(Message.class);
-                        onCompleteCallback.callback(messages);
-                    } else {
-                        Log.d(TAG, task.getException().toString());
-                        onCompleteCallback.callback(null);
-                    }
-                });
+            if (task.isSuccessful()) {
+                List<Message> messages = task.getResult().toObjects(Message.class);
+                onCompleteCallback.callback(messages);
+            } else {
+                Log.d(TAG, task.getException().toString());
+                onCompleteCallback.callback(null);
+            }
+        });
+    }
+
+    // This is used by FirestoreRecyclerAdapter to attach a listener to the query
+    public static FirestoreRecyclerOptions<Message> getMessagesByChannelOption(String cid) {
+        Query query = db.collection("messages").whereEqualTo("cid", cid)
+                .orderBy("timestamp");
+        return new FirestoreRecyclerOptions.Builder<Message>()
+                .setQuery(query, Message.class)
+                .build();
+
     }
 
 
@@ -185,7 +198,7 @@ public final class Database {
 
     // Update a user, return null on error.
     public static void updateUser(User user, Callback<User> onCompleteCallback) {
-        FirebaseFirestore.getInstance().collection("users").document(user.getUid()).set(user, SetOptions.merge())
+        db.collection("users").document(user.getUid()).set(user, SetOptions.merge())
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         onCompleteCallback.callback(user);

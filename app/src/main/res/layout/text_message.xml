@@ -14,7 +14,7 @@
         android:id="@+id/textViewMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxWidth="260dp"
+        android:maxWidth="290dp"
         android:text="@{data.messageText}"
         tools:text="TEXT_DATA" />
 </layout>
