@@ -102,6 +102,7 @@ public class LauncherActivity extends AppCompatActivity {
                 });
             } else {
                 Log.d(TAG, "Error creating user " + firebaseAuth.getCurrentUser().getUid());
+                finish();
             }
         });
     }

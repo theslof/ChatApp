@@ -11,10 +11,13 @@ import se.newton.chatapp.BR;
 public class User extends BaseObservable{
     private String uid = "";
     private String displayName = "Anonymous";
-    private String profileImage;
+    private String profileImage = "";
 
     //List<Channel>
     //List<Users>
+
+    // The bitmap is used to hold the bitmap for DataBinding purposes, so we don't have to keep
+    //  calling Glide every time we want to draw the image. It is Excluded from Firestore.
     @Exclude private Bitmap profileBitmap;
 
     public User(){}

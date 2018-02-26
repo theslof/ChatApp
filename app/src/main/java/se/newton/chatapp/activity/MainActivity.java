@@ -21,32 +21,36 @@ import com.bumptech.glide.request.RequestOptions;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
-
-import java.util.HashMap;
 
 import se.newton.chatapp.R;
 import se.newton.chatapp.fragment.ChatFragment;
-import se.newton.chatapp.model.Channel;
-import se.newton.chatapp.model.Message;
 import se.newton.chatapp.model.User;
+import se.newton.chatapp.service.UserManager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     final static String TAG = "MainActivity";
-    FirebaseUser fUser;
-    FirebaseFirestore db;
+    private FirebaseUser fUser;
+    private FirebaseFirestore db;
+    private User user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // -- Firebase --
+
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+
+        // Create a User object for the current user, which will fetch the data from Firebase and
+        //  download the profile image.
+        user = UserManager.getUser(Glide.with(this), fUser.getUid());
 
         // Connect Toolbar to layout
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -62,11 +66,9 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // ---- Firebase ----
-
-        fUser = FirebaseAuth.getInstance().getCurrentUser();
-        db = FirebaseFirestore.getInstance();
-
+        // -- Side drawer user info --
+        // TODO: Use data from our own Firebase User instead, as this may crash if user does not log in via Google.
+        // Use databinding instead, so it updates as the user profile is edited? Or move this to onStart?
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         Uri personPhoto = null;
         if (acct != null) {
@@ -86,12 +88,17 @@ public class MainActivity extends AppCompatActivity
         ImageView nav_img = (ImageView) hView.findViewById(R.id.imageView);
         nav_img.setImageURI(acct.getPhotoUrl());
 
-        Glide.with(this).load(personPhoto).apply(RequestOptions.circleCropTransform()).into(nav_img);
+        Glide.with(this).load(personPhoto)
+                .apply(RequestOptions.circleCropTransform())
+                .apply(RequestOptions.placeholderOf(
+                        R.drawable.ic_profile_image_placeholder_circular))
+                .into(nav_img);
 
 
         // -- Showing all messages in a chat room --
 
         // Create a new chat fragment that will show all messages sent to "MyTestChannel"
+        //TODO: Implement another landing page, perhaps latest channel viewed
         ChatFragment chatFragment = ChatFragment.newInstance("MyTestChannel");
 
         getFragmentManager().beginTransaction()
@@ -121,6 +128,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    // TODO: Move this to side drawer
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -144,6 +152,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    // TODO: Implement navigation via side drawer
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

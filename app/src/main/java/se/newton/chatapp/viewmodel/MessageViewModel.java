@@ -63,7 +63,7 @@ public class MessageViewModel extends BaseObservable {
     @BindingAdapter("android:profile")
     public static void loadProfileImage(ImageView view, Bitmap image) {
         if (image == null)
-            view.setImageResource(R.drawable.ic_profile_image_placeholder);
+            view.setImageResource(R.drawable.ic_profile_image_placeholder_circular);
         else
             view.setImageBitmap(image);
     }

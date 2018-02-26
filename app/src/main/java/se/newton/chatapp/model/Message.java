@@ -14,6 +14,9 @@ public class Message {
     private String data;
     private int messageType;
 
+    // ServerTimestamp is filled in by the Firestore server as the message is created, meaning that
+    //  we will not get strange timestamp issues if people chat from different locales, or have the
+    //  wrong time set.
     @ServerTimestamp
     private Date timestamp;
 

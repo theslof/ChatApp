@@ -32,6 +32,9 @@ public class ChatFragment extends Fragment {
         // Required empty public constructor
     }
 
+    // Use this method to create a new ChatFragment instead of calling the constructor. Here we can
+    //  pass arguments if needed.
+    // cid - ID of the channel that is to be displayed in the fragment.
     public static ChatFragment newInstance(String cid) {
         Log.d(TAG, "Creating a new fragment");
         ChatFragment fragment = new ChatFragment();
@@ -55,23 +58,37 @@ public class ChatFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        // Create an adapter to show the messages from Firestore as a RecyclerView list
         adapter = new MessageAdapter(Database.getMessagesByChannelOption(cid), Glide.with(this));
 
         Activity activity = getActivity();
+        // Connect the adapter to the RecyclerView
         ((RecyclerView) activity.findViewById(R.id.messageList)).setAdapter(adapter);
+
+        // Attach a listener to the Send button.
         activity.findViewById(R.id.buttonSend).setOnClickListener(view -> {
             TextView messageText = activity.findViewById(R.id.messageText);
             if(messageText.getText().length() > 0)
+                // If the text field is not empty, send the message and set the text field to blank.
+                // Consider waiting for server response before wiping the text field, showing an
+                //  animation in the mean time.
                 Database.createMessage(Message.TYPE_TEXT, messageText.getText().toString(), cid, m -> {});
                 messageText.setText("");
         });
 
+        // Attach a listener to the Attachment button, which currently just sends the user profile
+        //  image as an image message.
+        // TODO: Implement a context menu where you can choose between different items to send.
         activity.findViewById(R.id.buttonAttach).setOnClickListener(view -> {
             Database.createMessage(Message.TYPE_IMAGE, FirebaseAuth.getInstance().getCurrentUser()
                     .getPhotoUrl().toString(), cid, m -> {});
         });
     }
 
+
+    // onStart/onStop that makes sure we don't keep listening for message changes if the channel is
+    //  not visible.
+    // TODO: Consider keeping the listeners active somewhere else, so we can flag for new messages in the side drawer.
     @Override
     public void onStart() {
         super.onStart();
