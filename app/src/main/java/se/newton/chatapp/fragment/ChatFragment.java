@@ -2,7 +2,8 @@ package se.newton.chatapp.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -13,18 +14,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.Query;
+
+import java.util.UUID;
 
 import se.newton.chatapp.R;
 import se.newton.chatapp.adapter.MessageAdapter;
 import se.newton.chatapp.model.Message;
 import se.newton.chatapp.service.Database;
+import se.newton.chatapp.service.Storage;
+
+import static android.app.Activity.RESULT_OK;
 
 public class ChatFragment extends Fragment {
     private static final String TAG = "ChatFragment";
+    static final int REQUEST_IMAGE_OPEN_AND_SEND = 1;
     private String cid;
     private MessageAdapter adapter;
 
@@ -79,10 +82,13 @@ public class ChatFragment extends Fragment {
         // Attach a listener to the Attachment button, which currently just sends the user profile
         //  image as an image message.
         // TODO: Implement a context menu where you can choose between different items to send.
+/*
         activity.findViewById(R.id.buttonAttach).setOnClickListener(view -> {
             Database.createMessage(Message.TYPE_IMAGE, FirebaseAuth.getInstance().getCurrentUser()
                     .getPhotoUrl().toString(), cid, m -> {});
         });
+*/
+        activity.findViewById(R.id.buttonAttach).setOnClickListener(view -> startImagePicker());
     }
 
 
@@ -99,5 +105,26 @@ public class ChatFragment extends Fragment {
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+
+    // -- Launch image picker to upload to Firebase and send as a message --
+    private void startImagePicker(){
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType("image/*");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(intent, REQUEST_IMAGE_OPEN_AND_SEND);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_OPEN_AND_SEND && resultCode == RESULT_OK) {
+            Uri fullPhotoUri = data.getData();
+            Storage.uploadImage(fullPhotoUri, UUID.randomUUID().toString(), task -> {
+                if(task.isSuccessful())
+                    Database.createMessage(Message.TYPE_IMAGE,
+                            task.getResult().getDownloadUrl().toString(), cid, m -> {});
+            });
+        }
     }
 }
