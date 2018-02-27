@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity
         ChatFragment chatFragment = ChatFragment.newInstance("MyTestChannel");
 
         getFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, chatFragment, "CHAT")
+                .replace(R.id.fragment_container, chatFragment, "CHAT")
                 .commit();
     }
 
