@@ -87,6 +87,12 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -117,11 +123,6 @@ public class MainActivity extends AppCompatActivity
                 .apply(RequestOptions.placeholderOf(
                         R.drawable.ic_profile_image_placeholder_circular))
                 .into(nav_img);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
     }
 
     @Override
@@ -171,13 +172,6 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }
-        if (id == R.id.action_logout) {
-            AuthUI.getInstance()
-                    .signOut(this)
-                    .addOnCompleteListener(task -> {
-                        finish();
-                    });
 
         }
 
@@ -197,6 +191,13 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
+        } else if (id == R.id.nav_log_out) {
+            AuthUI.getInstance()
+                    .signOut(this)
+                    .addOnCompleteListener(task -> {
+                        finish();
+                    });
+
         } else if (id == R.id.nav_my_profile) {
             ProfileFragment profileFragment = ProfileFragment.newInstance(fUser.getUid());
 
@@ -208,6 +209,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
 
         }
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
