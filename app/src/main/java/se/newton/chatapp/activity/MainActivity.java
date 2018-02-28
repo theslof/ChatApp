@@ -1,5 +1,7 @@
 package se.newton.chatapp.activity;
 
+import android.app.FragmentManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -26,8 +28,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import se.newton.chatapp.R;
 import se.newton.chatapp.fragment.ChatFragment;
-import se.newton.chatapp.model.Channel;
-import se.newton.chatapp.model.Message;
 import se.newton.chatapp.model.User;
 import se.newton.chatapp.service.UserManager;
 
@@ -114,9 +114,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+        FragmentManager fm = getFragmentManager();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (fm.getBackStackEntryCount() > 0) {
+            fm.popBackStackImmediate();
         } else {
             super.onBackPressed();
         }
@@ -173,6 +176,7 @@ public class MainActivity extends AppCompatActivity
 
             getFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, profileFragment, "Profile")
+                    .addToBackStack("Profile")
                     .commit();
 
         } else if (id == R.id.nav_send) {
