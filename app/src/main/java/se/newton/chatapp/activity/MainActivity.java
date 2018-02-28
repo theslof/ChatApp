@@ -28,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import se.newton.chatapp.R;
 import se.newton.chatapp.fragment.ChatFragment;
+import se.newton.chatapp.fragment.ProfileFragment;
 import se.newton.chatapp.model.User;
 import se.newton.chatapp.service.UserManager;
 
