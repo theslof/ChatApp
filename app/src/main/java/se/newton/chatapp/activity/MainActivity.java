@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity
 
     private void openChannel(String cid, boolean noBackstack) {
 
-        Fragment currentFragment = fragmentManager.getPrimaryNavigationFragment();
+        Fragment currentFragment = fragmentManager.findFragmentById(R.id.fragment_container);
         if (currentFragment != null && currentFragment.getTag().equals(cid))
             return;
 
