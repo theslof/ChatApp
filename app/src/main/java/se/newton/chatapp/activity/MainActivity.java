@@ -43,14 +43,40 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        String cid = "MyTestChannel";
+
+        Uri data = this.getIntent().getData();
+        if (data != null) {
+            cid = data.getLastPathSegment();
+        }
 
         // -- Firebase --
 
         fUser = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
 
-        // Create a User object for the current user, which will fetch the data from Firebase and
+        if (fUser == null) {
+            setContentView(R.layout.activity_main_nologin);
+        }else{
+
+            setContentView(R.layout.activity_main);
+        }
+
+        // -- Showing all messages in a chat room --
+
+        // Create a new chat fragment that will show all messages sent to "MyTestChannel"
+        //TODO: Implement another landing page, perhaps latest channel viewed
+        ChatFragment chatFragment = ChatFragment.newInstance(cid);
+
+        getFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, chatFragment, cid)
+                .commit();
+
+        if (fUser == null)
+            return;
+
+            // Create a User object for the current user, which will fetch the data from Firebase and
         //  download the profile image.
         user = UserManager.getUser(Glide.with(this), fUser.getUid());
 
@@ -95,17 +121,6 @@ public class MainActivity extends AppCompatActivity
                 .apply(RequestOptions.placeholderOf(
                         R.drawable.ic_profile_image_placeholder_circular))
                 .into(nav_img);
-
-
-        // -- Showing all messages in a chat room --
-
-        // Create a new chat fragment that will show all messages sent to "MyTestChannel"
-        //TODO: Implement another landing page, perhaps latest channel viewed
-        ChatFragment chatFragment = ChatFragment.newInstance("MyTestChannel");
-
-        getFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, chatFragment, "CHAT")
-                .commit();
     }
 
     @Override
@@ -117,7 +132,7 @@ public class MainActivity extends AppCompatActivity
     public void onBackPressed() {
         FragmentManager fm = getFragmentManager();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if (drawer != null && drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else if (fm.getBackStackEntryCount() > 0) {
             fm.popBackStackImmediate();

@@ -14,7 +14,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 import se.newton.chatapp.R;
@@ -30,6 +35,7 @@ public class ChatFragment extends Fragment {
     static final int REQUEST_IMAGE_OPEN_AND_SEND = 1;
     private String cid;
     private MessageAdapter adapter;
+    private FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
 
     public ChatFragment() {
         // Required empty public constructor
@@ -70,6 +76,24 @@ public class ChatFragment extends Fragment {
 
         // Attach a listener to the Send button.
         activity.findViewById(R.id.buttonSend).setOnClickListener(view -> {
+            if(fUser == null){
+                List<AuthUI.IdpConfig> providers = Arrays.asList(
+                        // Email and password
+                        new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                        // Google
+                        new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
+
+                // Create and launch sign-in intent. This is done through startActivityForResult, which
+                // launches an activity from an Intent and calls onActivityResult when this Intent exits.
+                startActivity(
+                        // Create the Intent via FirebaseUI
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setAvailableProviders(providers)
+                                .build());
+                return;
+            }
+
             TextView messageText = activity.findViewById(R.id.messageText);
             if(messageText.getText().length() > 0)
                 // If the text field is not empty, send the message and set the text field to blank.
@@ -88,7 +112,27 @@ public class ChatFragment extends Fragment {
                     .getPhotoUrl().toString(), cid, m -> {});
         });
 */
-        activity.findViewById(R.id.buttonAttach).setOnClickListener(view -> startImagePicker());
+        activity.findViewById(R.id.buttonAttach).setOnClickListener(view -> {
+            if(fUser == null){
+                List<AuthUI.IdpConfig> providers = Arrays.asList(
+                        // Email and password
+                        new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                        // Google
+                        new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
+
+                // Create and launch sign-in intent. This is done through startActivityForResult, which
+                // launches an activity from an Intent and calls onActivityResult when this Intent exits.
+                startActivity(
+                        // Create the Intent via FirebaseUI
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setAvailableProviders(providers)
+                                .build());
+                return;
+            }
+
+            startImagePicker();
+        });
     }
 
 
@@ -107,6 +151,11 @@ public class ChatFragment extends Fragment {
         adapter.stopListening();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
+    }
 
     // -- Launch image picker to upload to Firebase and send as a message --
     private void startImagePicker(){
