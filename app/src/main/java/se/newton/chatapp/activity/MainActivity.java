@@ -180,14 +180,12 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_channel_one) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_my_profile) {
             ProfileFragment profileFragment = ProfileFragment.newInstance(fUser.getUid());
 
             getFragmentManager().beginTransaction()
@@ -195,7 +193,7 @@ public class MainActivity extends AppCompatActivity
                     .addToBackStack(fUser.getUid())
                     .commit();
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_settings) {
 
         }
 
