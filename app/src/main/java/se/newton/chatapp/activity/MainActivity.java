@@ -173,11 +173,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
-            ProfileFragment profileFragment = ProfileFragment.newInstance();
+            ProfileFragment profileFragment = ProfileFragment.newInstance(fUser.getUid());
 
             getFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, profileFragment, "Profile")
-                    .addToBackStack("Profile")
+                    .replace(R.id.fragment_container, profileFragment, fUser.getUid())
+                    .addToBackStack(fUser.getUid())
                     .commit();
 
         } else if (id == R.id.nav_send) {

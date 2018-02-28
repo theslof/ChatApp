@@ -24,7 +24,7 @@ import se.newton.chatapp.databinding.ProfileFragmentBinding;
 
 public class ProfileFragment extends Fragment {
 
-    private String fUserUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    private String fUserUid;
     private ProfileViewModel viewModel;
     private static final String TAG = "ProfileFragment";
 
@@ -32,9 +32,10 @@ public class ProfileFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static ProfileFragment newInstance() {
+    public static ProfileFragment newInstance(String fUserUid) {
         Log.d(TAG, "Creating profile fragment");
         ProfileFragment fragment = new ProfileFragment();
+        fragment.fUserUid = fUserUid;
         return fragment;
     }
 
