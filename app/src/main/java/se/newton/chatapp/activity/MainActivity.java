@@ -1,7 +1,9 @@
 package se.newton.chatapp.activity;
 
-import android.app.FragmentManager;
+import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -38,12 +40,14 @@ public class MainActivity extends AppCompatActivity
     private FirebaseUser fUser;
     private FirebaseFirestore db;
     private User user;
+    private FragmentManager fragmentManager = getSupportFragmentManager();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //TODO: Implement another landing page, perhaps latest channel viewed
         String cid = "MyTestChannel";
 
         Uri data = this.getIntent().getData();
@@ -58,25 +62,17 @@ public class MainActivity extends AppCompatActivity
 
         if (fUser == null) {
             setContentView(R.layout.activity_main_nologin);
-        }else{
-
+        } else {
             setContentView(R.layout.activity_main);
         }
 
-        // -- Showing all messages in a chat room --
-
-        // Create a new chat fragment that will show all messages sent to "MyTestChannel"
-        //TODO: Implement another landing page, perhaps latest channel viewed
-        ChatFragment chatFragment = ChatFragment.newInstance(cid);
-
-        getFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, chatFragment, cid)
-                .commit();
+        // Create a new chat fragment that will show all messages sent to channel cid
+        openChannel(cid, true);
 
         if (fUser == null)
             return;
 
-            // Create a User object for the current user, which will fetch the data from Firebase and
+        // Create a User object for the current user, which will fetch the data from Firebase and
         //  download the profile image.
         user = UserManager.getUser(Glide.with(this), fUser.getUid());
 
@@ -130,7 +126,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        FragmentManager fm = getFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer != null && drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -139,6 +135,22 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        Log.d(TAG, "test");
+
+        Uri data = intent.getData();
+
+        if (data != null) {
+            String cid = data.getLastPathSegment();
+            Log.d("NewIntent", cid);
+            openChannel(cid);
+        }
+
     }
 
     @Override
@@ -188,7 +200,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_my_profile) {
             ProfileFragment profileFragment = ProfileFragment.newInstance(fUser.getUid());
 
-            getFragmentManager().beginTransaction()
+            fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, profileFragment, fUser.getUid())
                     .addToBackStack(fUser.getUid())
                     .commit();
@@ -200,6 +212,31 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void openChannel(String cid) {
+        openChannel(cid, false);
+    }
+
+    private void openChannel(String cid, boolean noBackstack) {
+
+        Fragment currentFragment = fragmentManager.getPrimaryNavigationFragment();
+        if (currentFragment != null && currentFragment.getTag().equals(cid))
+            return;
+
+        Fragment fragment = fragmentManager.findFragmentByTag(cid);
+        if (fragment == null)
+            fragment = ChatFragment.newInstance(cid);
+
+        if (noBackstack)
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment, cid)
+                    .commit();
+        else
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment, cid)
+                    .addToBackStack(cid)
+                    .commit();
     }
 }
 
