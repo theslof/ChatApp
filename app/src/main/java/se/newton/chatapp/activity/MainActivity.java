@@ -21,8 +21,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import se.newton.chatapp.R;
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity
     private FirebaseUser fUser;
     private FirebaseFirestore db;
     private User user;
+
+
 
 
     @Override
@@ -63,37 +67,10 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
         // -- Side drawer user info --
         // TODO: Use data from our own Firebase User instead, as this may crash if user does not log in via Google.
         // Use databinding instead, so it updates as the user profile is edited? Or move this to onStart?
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-        Uri personPhoto = null;
-        if (acct != null) {
-            String personName = acct.getDisplayName();
-            String personGivenName = acct.getGivenName();
-            String personFamilyName = acct.getFamilyName();
-            String personEmail = acct.getEmail();
-            String personId = acct.getId();
-            personPhoto = acct.getPhotoUrl();
-        }
-
-        View hView = navigationView.getHeaderView(0);
-        TextView nav_user = (TextView) hView.findViewById(R.id.nameView);
-        nav_user.setText(acct.getDisplayName());
-        TextView nav_mail = (TextView) hView.findViewById(R.id.mailView);
-        nav_mail.setText(acct.getEmail());
-        ImageView nav_img = (ImageView) hView.findViewById(R.id.imageView);
-        nav_img.setImageURI(acct.getPhotoUrl());
-
-        Glide.with(this).load(personPhoto)
-                .apply(RequestOptions.circleCropTransform())
-                .apply(RequestOptions.placeholderOf(
-                        R.drawable.ic_profile_image_placeholder_circular))
-                .into(nav_img);
-
+        // Moved to onStart!
 
         // -- Showing all messages in a chat room --
 
@@ -109,6 +86,36 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        Uri personPhoto = null;
+        if (acct != null) {
+            String personName = acct.getDisplayName();
+            String personGivenName = acct.getGivenName();
+            String personFamilyName = acct.getFamilyName();
+            String personEmail = acct.getEmail();
+            String personId = acct.getId();
+            personPhoto = acct.getPhotoUrl();
+        }
+
+        View hView = navigationView.getHeaderView(0);
+        TextView nav_user = (TextView) hView.findViewById(R.id.nameView);
+        assert acct != null;
+        nav_user.setText(acct.getDisplayName());
+        TextView nav_mail = (TextView) hView.findViewById(R.id.mailView);
+        nav_mail.setText(acct.getEmail());
+        ImageView nav_img = (ImageView) hView.findViewById(R.id.imageView);
+        nav_img.setImageURI(acct.getPhotoUrl());
+
+        Glide.with(this).load(personPhoto)
+                .apply(RequestOptions.circleCropTransform())
+                .apply(RequestOptions.placeholderOf(
+                        R.drawable.ic_profile_image_placeholder_circular))
+                .into(nav_img);
+
     }
 
     @Override
@@ -140,14 +147,6 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
-        if (id == R.id.action_logout) {
-            AuthUI.getInstance()
-                    .signOut(this)
-                    .addOnCompleteListener(task -> {
-                        finish();
-                    });
-
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -167,10 +166,14 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
-
         } else if (id == R.id.nav_send) {
 
+        } else if (id == R.id.nav_log_out) {
+            AuthUI.getInstance()
+                    .signOut(this)
+                    .addOnCompleteListener(task -> {
+                        finish();
+                    });
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
