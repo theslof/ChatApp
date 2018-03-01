@@ -25,6 +25,7 @@ import java.util.UUID;
 import se.newton.chatapp.R;
 import se.newton.chatapp.adapter.MessageAdapter;
 import se.newton.chatapp.model.Message;
+import se.newton.chatapp.service.AdapterManager;
 import se.newton.chatapp.service.Database;
 import se.newton.chatapp.service.Storage;
 
@@ -54,6 +55,7 @@ public class ChatFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Override
@@ -68,7 +70,7 @@ public class ChatFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         // Create an adapter to show the messages from Firestore as a RecyclerView list
-        adapter = new MessageAdapter(Database.getMessagesByChannelOption(cid), Glide.with(this));
+        adapter = AdapterManager.getAdapter(Glide.with(this), cid);
 
         Activity activity = getActivity();
         // Connect the adapter to the RecyclerView

@@ -47,14 +47,6 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //TODO: Implement another landing page, perhaps latest channel viewed
-        String cid = "MyTestChannel";
-
-        Uri data = this.getIntent().getData();
-        if (data != null) {
-            cid = data.getLastPathSegment();
-        }
-
         // -- Firebase --
 
         fUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -64,10 +56,22 @@ public class MainActivity extends AppCompatActivity
             setContentView(R.layout.activity_main_nologin);
         } else {
             setContentView(R.layout.activity_main);
+            user = UserManager.getUser(Glide.with(this), fUser.getUid());
         }
 
-        // Create a new chat fragment that will show all messages sent to channel cid
-        openChannel(cid, true);
+        if(savedInstanceState == null) {
+
+            //TODO: Implement another landing page, perhaps latest channel viewed
+            String cid = "MyTestChannel";
+
+            Uri data = this.getIntent().getData();
+            if (data != null) {
+                cid = data.getLastPathSegment();
+            }
+
+            // Create a new chat fragment that will show all messages sent to channel cid
+            openChannel(cid, true);
+        }
 
         if (fUser == null)
             return;
@@ -92,6 +96,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
+
+        if(fUser == null)
+            return;
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -213,11 +220,9 @@ public class MainActivity extends AppCompatActivity
 
         Fragment currentFragment = fragmentManager.findFragmentById(R.id.fragment_container);
         if (currentFragment != null && currentFragment.getTag().equals(cid))
-            return;
+            noBackstack = true;
 
-        Fragment fragment = fragmentManager.findFragmentByTag(cid);
-        if (fragment == null)
-            fragment = ChatFragment.newInstance(cid);
+        Fragment fragment = ChatFragment.newInstance(cid);
 
         if (noBackstack)
             fragmentManager.beginTransaction()
