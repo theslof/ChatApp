@@ -1,4 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <PreferenceCategory android:title="Settings">
+
+
+        <EditTextPreference
+            android:defaultValue="English"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Language"/>
+        <EditTextPreference
+            android:defaultValue="Casual"
+            android:key=""
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Theme" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Account">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key=""
+            android:title="Show as offline" />
+        <MultiSelectListPreference
+            android:selectAllOnFocus="true"
+            android:title="Edit profile"/>
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Other">
+        <EditTextPreference
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="About">
+
+        </EditTextPreference>
+    </PreferenceCategory>
 </PreferenceScreen>
