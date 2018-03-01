@@ -193,13 +193,7 @@ public class MainActivity extends AppCompatActivity
                     });
 
         } else if (id == R.id.nav_my_profile) {
-            ProfileFragment profileFragment = ProfileFragment.newInstance(fUser.getUid());
-
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, profileFragment, fUser.getUid())
-                    .addToBackStack(fUser.getUid())
-                    .commit();
-
+            openProfile(fUser.getUid());
         } else if (id == R.id.nav_settings) {
 
         }
@@ -235,5 +229,39 @@ public class MainActivity extends AppCompatActivity
                     .addToBackStack(cid)
                     .commit();
     }
+
+    private void openProfile(String uid) {
+        openProfile(uid, false);
+    }
+
+    private void openProfile(String uid, boolean noBackstack) {
+
+        Fragment currentFragment = fragmentManager.findFragmentById(R.id.fragment_container);
+        if (currentFragment != null && currentFragment.getTag().equals(uid))
+            return;
+
+        Fragment fragment = fragmentManager.findFragmentByTag(uid);
+        if (fragment == null)
+            fragment = ProfileFragment.newInstance(uid);
+
+        if (noBackstack)
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment, uid)
+                    .commit();
+        else
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment, uid)
+                    .addToBackStack(uid)
+                    .commit();
+
+        /*
+        ProfileFragment profileFragment = ProfileFragment.newInstance(fUser.getUid());
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, profileFragment, fUser.getUid())
+                .addToBackStack(fUser.getUid())
+                .commit();
+         */
+    }
+
 }
 
