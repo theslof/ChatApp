@@ -23,10 +23,10 @@ exports.createmessage = functions.firestore
     // Send a message
     var message = {
       notification: {
-        title: 'Test title',
-        body: 'Test body'
+        title: 'New message',
+        body: 'There are new messages available'
       },
-      topic: 'default'};
+      topic: cid};
 
    return defaultMessaging.send(message)
       .then((response) => {
