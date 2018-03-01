@@ -262,14 +262,6 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.fragment_container, fragment, uid)
                     .addToBackStack(uid)
                     .commit();
-
-        /*
-        ProfileFragment profileFragment = ProfileFragment.newInstance(fUser.getUid());
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, profileFragment, fUser.getUid())
-                .addToBackStack(fUser.getUid())
-                .commit();
-         */
     }
 
 }

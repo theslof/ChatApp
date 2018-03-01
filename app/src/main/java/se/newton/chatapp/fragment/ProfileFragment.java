@@ -50,6 +50,8 @@ public class ProfileFragment extends Fragment {
 
         viewModel = new ProfileViewModel(Glide.with(this), fUserUid);
 
+        getActivity().setTitle("Profile");
+
         // Inflate the layout for this fragment
         ProfileFragmentBinding binding = DataBindingUtil.inflate(inflater,R.layout.profile_fragment, container, false);
         binding.setViewModel(viewModel);
