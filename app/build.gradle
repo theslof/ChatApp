@@ -49,8 +49,7 @@ dependencies {
         transitive = true
     }
     implementation 'com.google.firebase:firebase-core:11.8.0'
-    implementation project(":pushnotify")
-
+    implementation 'com.google.firebase:firebase-messaging:11.8.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

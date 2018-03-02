@@ -63,10 +63,12 @@ public class MainActivity extends AppCompatActivity
         if (savedInstanceState == null) {
 
             //TODO: Implement another landing page, perhaps latest channel viewed
+
+            //When started after clicking on Cloud Message Notification
             String cid = getIntent().getStringExtra("cid");
             if (cid == null)
                 cid = "MyTestChannel";
-
+            //When started with deep link
             Uri data = this.getIntent().getData();
             if (data != null) {
                 cid = data.getLastPathSegment();
@@ -155,12 +157,15 @@ public class MainActivity extends AppCompatActivity
 
         Log.d(TAG, "test");
 
+        //When clicking Cloud Message Notification
+        //and already running we can get the channel id from extra data in intent.
         String cid = intent.getStringExtra("cid");
         if (cid != null) {
             Log.d("NewIntent", cid);
             openChannel(cid);
         }
 
+        //Already running and deep link start
         Uri data = intent.getData();
 
         if (data != null) {

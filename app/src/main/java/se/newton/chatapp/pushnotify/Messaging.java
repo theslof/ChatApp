@@ -8,7 +8,12 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 public final class Messaging {
 
-    private Messaging(){}
+    private Messaging() {
+    }
+
+    public static void registerNotificationChannel() {
+        //ToDo: Register a notification channel for >Oreo. Set default channel in manifest.
+    }
 
     public static void subscribeToTopic(String cid) {
         FirebaseMessaging.getInstance().subscribeToTopic(cid);

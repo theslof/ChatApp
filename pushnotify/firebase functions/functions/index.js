@@ -7,7 +7,7 @@ admin.initializeApp();
 var defaultMessaging = admin.messaging();
 
 //Trigger a function when a new document is created in messages
-exports.createmessage = functions.firestore
+exports.newmessage = functions.firestore
   .document('messages/{documentId}')
   .onCreate(event => {
     // Get an object representing the document
@@ -16,7 +16,7 @@ exports.createmessage = functions.firestore
 
     // access channel id from message
     var cid = newValue.cid;
-    var action = "NewMessages";//se.newton.chatapp://channel/"+ cid;
+    var action = "NewMessages";
 
     // Send Push Message
     var message = {
