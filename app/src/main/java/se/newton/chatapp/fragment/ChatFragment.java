@@ -25,6 +25,7 @@ import java.util.UUID;
 import se.newton.chatapp.R;
 import se.newton.chatapp.adapter.MessageAdapter;
 import se.newton.chatapp.model.Message;
+import se.newton.chatapp.pushnotify.Messaging;
 import se.newton.chatapp.service.AdapterManager;
 import se.newton.chatapp.service.Database;
 import se.newton.chatapp.service.Storage;
@@ -49,6 +50,7 @@ public class ChatFragment extends Fragment {
         Log.d(TAG, "Creating a new fragment");
         ChatFragment fragment = new ChatFragment();
         fragment.cid = cid;
+        Messaging.subscribeToTopic(cid);
         return fragment;
     }
 

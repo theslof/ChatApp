@@ -3,7 +3,7 @@ const functions = require('firebase-functions');
 // The Firebase Admin SDK to access the Firebase Realtime Database.
 const admin = require('firebase-admin');
 admin.initializeApp();
-// Get the Messaging service for the default app
+// Get the Messaging service ( Firebase Cloud Messaging)for the default app
 var defaultMessaging = admin.messaging();
 
 //Trigger a function when a new document is created in messages
@@ -14,24 +14,32 @@ exports.createmessage = functions.firestore
     // e.g. {'name': 'Marie', 'age': 66}
     var newValue = event.data.data();
 
-    // access a particular field as you would any JS property
+    // access channel id from message
     var cid = newValue.cid;
+    var action = "NewMessages";//se.newton.chatapp://channel/"+ cid;
 
-    // perform desired operations ...
     // Send Push Message
-
-    // Send a message
     var message = {
-      notification: {
-        title: 'New message',
-        body: 'There are new messages available'
+    android: {
+    ttl: 60 * 1000,
+    notification: {
+        title: cid,
+        body: 'New message(s)',
+        tag: '1',
+        clickAction: action
+        }
       },
-      topic: cid};
+      data:{
+        cid : cid
+      },
+      topic: cid
+      };
 
    return defaultMessaging.send(message)
       .then((response) => {
         // Response is a message ID string.
         console.log('Successfully sent message:', response);
+        console.log('action:', action);
       })
       .catch((error) => {
         console.log('Error sending message:', error);

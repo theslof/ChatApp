@@ -60,15 +60,18 @@ public class MainActivity extends AppCompatActivity
             user = UserManager.getUser(Glide.with(this), fUser.getUid());
         }
 
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
 
             //TODO: Implement another landing page, perhaps latest channel viewed
-            String cid = "MyTestChannel";
+            String cid = getIntent().getStringExtra("cid");
+            if (cid == null)
+                cid = "MyTestChannel";
 
             Uri data = this.getIntent().getData();
             if (data != null) {
                 cid = data.getLastPathSegment();
             }
+
 
             // Create a new chat fragment that will show all messages sent to channel cid
             openChannel(cid, true);
@@ -98,7 +101,7 @@ public class MainActivity extends AppCompatActivity
     protected void onStart() {
         super.onStart();
 
-        if(fUser == null)
+        if (fUser == null)
             return;
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -152,10 +155,16 @@ public class MainActivity extends AppCompatActivity
 
         Log.d(TAG, "test");
 
+        String cid = intent.getStringExtra("cid");
+        if (cid != null) {
+            Log.d("NewIntent", cid);
+            openChannel(cid);
+        }
+
         Uri data = intent.getData();
 
         if (data != null) {
-            String cid = data.getLastPathSegment();
+            cid = data.getLastPathSegment();
             Log.d("NewIntent", cid);
             openChannel(cid);
         }
@@ -208,7 +217,6 @@ public class MainActivity extends AppCompatActivity
             return true;
 
         }
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

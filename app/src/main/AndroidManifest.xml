@@ -11,14 +11,20 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".activity.MainActivity"
             android:windowSoftInputMode="stateHidden"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:exported="true">
             <intent-filter android:label="@string/filter_channel">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Accepts URIs that begin with "example://gizmos” -->
                 <data android:scheme="se.newton.chatapp"
-                    android:host="channel" />
+                    android:host="channel"
+                    android:pathPrefix="/"/>
+            </intent-filter>
+            <intent-filter>
+                <action  android:name="NewMessages" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".activity.LauncherActivity"
