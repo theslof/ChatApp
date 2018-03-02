@@ -38,7 +38,7 @@
         <activity android:name=".activity.SettingsActivity" />
         <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
      See README(https://goo.gl/l4GJaQ) for more.
-      At the moment with Firebase 11.8 it doesn't work and will just show a round colored circle-->
+      At the moment with Firebase 11.8 it doesn't work and will just show a round colored circle on Oreo 8.0-->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_stat_ic_notification" />
