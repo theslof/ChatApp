@@ -17,7 +17,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <!-- Accepts URIs that begin with "example://gizmos” -->
+                <!-- Accepts URIs that begin with "se.newton.chatapp://channel” -->
                 <data android:scheme="se.newton.chatapp"
                     android:host="channel"
                     android:pathPrefix="/"/>
