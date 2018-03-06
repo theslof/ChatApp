@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +33,7 @@ import se.newton.chatapp.service.AdapterManager;
 import se.newton.chatapp.service.ChannelManager;
 import se.newton.chatapp.service.Database;
 import se.newton.chatapp.service.Storage;
+import se.newton.chatapp.viewmodel.ChannelViewModel;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -42,6 +44,7 @@ public class ChatFragment extends Fragment {
     private Channel channel;
     private MessageAdapter adapter;
     private FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
+    private ChannelViewModel viewModel;
 
     public ChatFragment() {
         // Required empty public constructor
@@ -50,10 +53,11 @@ public class ChatFragment extends Fragment {
     // Use this method to create a new ChatFragment instead of calling the constructor. Here we can
     //  pass arguments if needed.
     // cid - ID of the channel that is to be displayed in the fragment.
-    public static ChatFragment newInstance(String cid) {
+    public static ChatFragment newInstance(RequestManager glideManager, String cid) {
         Log.d(TAG, "Creating a new fragment");
         ChatFragment fragment = new ChatFragment();
         fragment.channel = new Channel(cid);
+        fragment.viewModel = ChannelViewModel.getViewModel(glideManager, cid);
         Messaging.subscribeToTopic(cid);
         Database.createChannel(fragment.channel, c -> {
             fragment.channel = c;
@@ -84,7 +88,7 @@ public class ChatFragment extends Fragment {
 
         Activity activity = getActivity();
         // Connect the adapter to the RecyclerView
-        ((RecyclerView) activity.findViewById(R.id.messageList)).setAdapter(adapter);
+        ((RecyclerView) activity.findViewById(R.id.messageList)).setAdapter(viewModel.getAdapter());
 
         // Attach a listener to the Send button.
         activity.findViewById(R.id.buttonSend).setOnClickListener(view -> {
@@ -120,12 +124,7 @@ public class ChatFragment extends Fragment {
         // Attach a listener to the Attachment button, which currently just sends the user profile
         //  image as an image message.
         // TODO: Implement a context menu where you can choose between different items to send.
-/*
-        activity.findViewById(R.id.buttonAttach).setOnClickListener(view -> {
-            Database.createMessage(Message.TYPE_IMAGE, FirebaseAuth.getInstance().getCurrentUser()
-                    .getPhotoUrl().toString(), cid, m -> {});
-        });
-*/
+
         activity.findViewById(R.id.buttonAttach).setOnClickListener(view -> {
             if (fUser == null) {
                 // Select login methods, save as a List used in the next method call
@@ -146,22 +145,6 @@ public class ChatFragment extends Fragment {
 
             startImagePicker();
         });
-    }
-
-
-    // onStart/onStop that makes sure we don't keep listening for message changes if the channel is
-    //  not visible.
-    // TODO: Consider keeping the listeners active somewhere else, so we can flag for new messages in the side drawer.
-    @Override
-    public void onStart() {
-        super.onStart();
-        adapter.startListening();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        adapter.stopListening();
     }
 
     @Override

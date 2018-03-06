@@ -299,7 +299,7 @@ public class MainActivity extends AppCompatActivity
         if (currentFragment != null && currentFragment.getTag().equals(cid))
             noBackstack = true;
 
-        Fragment fragment = ChatFragment.newInstance(cid);
+        Fragment fragment = ChatFragment.newInstance(Glide.with(this), cid);
 
         if (noBackstack)
             fragmentManager.beginTransaction()
