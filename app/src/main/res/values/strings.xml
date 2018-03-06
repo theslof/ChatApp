@@ -21,14 +21,14 @@
     <string name="error_unknown_message_type">Error: Unknown message type!</string>
     <string name="title_activity_fullscreen_image">FullscreenImageActivity</string>
 
-
-    <string-array name="theme_array">
-        <item name="App Theme">@style/AppTheme</item>
-        <item>@style/Dragomir</item>
-        <item>@style/Elias1</item>
-        <item>@style/Elias2</item>
-        <item>@style/Jonas</item>
+    <string-array name="theme_values">
+        <item>App theme</item>
+        <item>Dragomir</item>
+        <item>Elias 1</item>
+        <item>Elias 2</item>
+        <item>Jonas</item>
     </string-array>
+
 
 
 
