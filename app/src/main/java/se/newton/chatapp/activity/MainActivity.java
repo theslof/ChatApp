@@ -21,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -186,6 +187,23 @@ public class MainActivity extends AppCompatActivity
                 .apply(RequestOptions.placeholderOf(
                         R.drawable.ic_profile_image_placeholder_circular))
                 .into(nav_img);
+
+        // -- Dynamic Menu Option --
+        addMenuItemInNavMenuDrawer();
+    }
+
+    // -- Method For Dynamic Menu --
+    private void addMenuItemInNavMenuDrawer() {
+        NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
+
+        Menu menu = navView.getMenu();
+        Menu submenu = menu.addSubMenu("Channels");
+
+        submenu.add("Channel 1");
+        submenu.add("Channel 2");
+        submenu.add("Channel 3");
+
+        navView.invalidate();
     }
 
     @Override
