@@ -18,8 +18,6 @@
             android:title="Slideshow" />
     </group>
 
-
-
     <item android:title="Extra">
         <menu>
             <item
