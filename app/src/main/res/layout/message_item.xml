@@ -26,6 +26,10 @@
             android:profile="@{viewModel.user.profileBitmap}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:focusable="true"
+            android:clickable="true"
+            android:tag="@{viewModel.user.uid}"
+            android:onClick="viewUser"
             android:contentDescription="TODO" />
 
         <TextView
@@ -39,6 +43,10 @@
             android:text="@{viewModel.user.displayName}"
             android:textSize="18dp"
             android:textStyle="bold"
+            android:focusable="true"
+            android:clickable="true"
+            android:tag="@{viewModel.user.uid}"
+            android:onClick="viewUser"
             app:layout_constraintStart_toEndOf="@+id/profileImageView"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="USER_NAME" />

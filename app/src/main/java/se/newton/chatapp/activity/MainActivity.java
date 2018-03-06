@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
     }
 
     @Override
@@ -273,6 +272,11 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.fragment_container, fragment, uid)
                     .addToBackStack(uid)
                     .commit();
+    }
+
+    public void viewUser(View v) {
+        Log.d("View profile uid" ,v.getTag().toString());
+        openProfile(v.getTag().toString());
     }
 
 }
