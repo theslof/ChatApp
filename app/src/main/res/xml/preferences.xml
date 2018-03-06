@@ -12,8 +12,8 @@
             android:title="Language"/>
         <ListPreference
             android:entryValues="@array/theme_values"
-            android:entries="@array/theme_array"
-            android:key="themeChange"
+            android:entries="@array/theme_values"
+            android:key="themeChanger"
             android:selectAllOnFocus="true"
             android:title="Theme" />
     </PreferenceCategory>
