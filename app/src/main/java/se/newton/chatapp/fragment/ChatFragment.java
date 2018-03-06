@@ -34,7 +34,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class ChatFragment extends Fragment {
     private static final String TAG = "ChatFragment";
-    static final int REQUEST_IMAGE_OPEN_AND_SEND = 1;
+    private static final int REQUEST_IMAGE_OPEN_AND_SEND = 1;
     private String cid;
     private MessageAdapter adapter;
     private FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();

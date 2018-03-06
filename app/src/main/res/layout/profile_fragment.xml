@@ -22,7 +22,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="60dp"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/profile_image"
             android:profile="@{viewModel.user.profileBitmap}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
-            android:text="Active Channels"
+            android:text="@string/active_channels"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/startPrivateChannel" />
 
@@ -83,7 +83,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
-            android:text="Friends"
+            android:text="@string/friends"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.961"
             app:layout_constraintStart_toEndOf="@+id/activeChannels"

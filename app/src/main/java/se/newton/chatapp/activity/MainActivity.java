@@ -35,10 +35,8 @@ import se.newton.chatapp.service.UserManager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    final static String TAG = "MainActivity";
+    private final static String TAG = "MainActivity";
     private FirebaseUser fUser;
-    private FirebaseFirestore db;
-    private User user;
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
 
@@ -49,7 +47,8 @@ public class MainActivity extends AppCompatActivity
         // -- Firebase --
 
         fUser = FirebaseAuth.getInstance().getCurrentUser();
-        db = FirebaseFirestore.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        User user;
 
         if (fUser == null) {
             setContentView(R.layout.activity_main_nologin);
