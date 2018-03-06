@@ -10,11 +10,11 @@
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:title="Language"/>
-        <EditTextPreference
-            android:defaultValue="Casual"
-            android:key=""
+        <ListPreference
+            android:entryValues="@array/theme_values"
+            android:entries="@array/theme_array"
+            android:key="themeChange"
             android:selectAllOnFocus="true"
-            android:singleLine="true"
             android:title="Theme" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Account">
@@ -23,7 +23,7 @@
             android:defaultValue="false"
             android:key=""
             android:title="Show as offline" />
-        <MultiSelectListPreference
+        <EditTextPreference
             android:selectAllOnFocus="true"
             android:title="Edit profile"/>
 
