@@ -20,7 +20,6 @@ public class LauncherActivity extends AppCompatActivity {
     private static final String TAG = "LauncherActivity";
     private static final int RC_SIGN_IN = 123;
     private FirebaseAuth firebaseAuth;
-    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +27,6 @@ public class LauncherActivity extends AppCompatActivity {
 
         // Get instances of Firebase APIs for later use
         firebaseAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
     }
 
     @Override

@@ -8,9 +8,16 @@
 
     <string name="filter_channel">Channel</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="start_private_channel">Start private chat</string>
+    <string name="attachment">Attachment</string>
+    <string name="image_message">Image message</string>
+    <string name="profile_image">Profile image</string>
+    <string name="my_profile">My Profile</string>
+    <string name="settings">Settings</string>
+    <string name="log_out">Log Out</string>
+    <string name="send">Send</string>
+    <string name="active_channels">Active Channels</string>
+    <string name="friends">Friends</string>
+    <string name="error_unknown_message_type">Error: Unknown message type!</string>
 
 </resources>

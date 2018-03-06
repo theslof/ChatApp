@@ -30,7 +30,7 @@
             android:clickable="true"
             android:tag="@{viewModel.user.uid}"
             android:onClick="viewUser"
-            android:contentDescription="TODO" />
+            android:contentDescription="@string/profile_image" />
 
         <TextView
             android:id="@+id/textViewUser"
@@ -41,7 +41,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="@{viewModel.user.displayName}"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:focusable="true"
             android:clickable="true"
