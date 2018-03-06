@@ -43,10 +43,8 @@ public class LauncherActivity extends AppCompatActivity {
         if (user == null) {
             // Select login methods, save as a List used in the next method call
             List<AuthUI.IdpConfig> providers = Arrays.asList(
-                    // Email and password
-                    new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
-                    // Google
-                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
+                    new AuthUI.IdpConfig.EmailBuilder().build(),
+                    new AuthUI.IdpConfig.GoogleBuilder().build());
 
             // Create and launch sign-in intent. This is done through startActivityForResult, which
             // launches an activity from an Intent and calls onActivityResult when this Intent exits.
