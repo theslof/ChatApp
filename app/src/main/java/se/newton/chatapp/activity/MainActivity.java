@@ -2,17 +2,16 @@ package se.newton.chatapp.activity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-import android.util.Log;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +30,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import se.newton.chatapp.R;
 import se.newton.chatapp.fragment.ChatFragment;
 import se.newton.chatapp.fragment.ProfileFragment;
-import se.newton.chatapp.fragment.SettingsFragment;
 import se.newton.chatapp.model.User;
 import se.newton.chatapp.service.UserManager;
 

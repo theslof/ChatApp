@@ -47,5 +47,7 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorPrimary" />
+        <!-- Disable crashlytics during debug builds.-->
+        <meta-data android:name="firebase_crashlytics_collection_enabled" android:value="${crashlyticsEnabled}" />
     </application>
 </manifest>
