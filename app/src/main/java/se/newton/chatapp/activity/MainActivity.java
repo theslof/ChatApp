@@ -64,14 +64,15 @@ public class MainActivity extends AppCompatActivity
 
             //When started after clicking on Cloud Message Notification
             String cid = getIntent().getStringExtra("cid");
-            if (cid == null)
-                cid = "MyTestChannel";
+
             //When started with deep link
             Uri data = this.getIntent().getData();
             if (data != null) {
                 cid = data.getLastPathSegment();
             }
 
+            if (cid == null)
+                cid = "MyTestChannel";
 
             // Create a new chat fragment that will show all messages sent to channel cid
             openChannel(cid, true);

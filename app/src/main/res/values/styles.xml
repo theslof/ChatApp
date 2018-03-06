@@ -22,4 +22,36 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="Dragomir" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorPrimary">@color/dPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/dPrimaryDarkColor</item>
+        <item name="colorAccent">@color/dSecondaryColor</item>
+        <item name="android:navigationBarColor">@color/dPrimaryColor</item>
+        <item name="android:colorForeground">@android:color/background_dark</item>
+    </style>
+
+    <style name="Elias1" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorPrimary">@color/e1PrimaryColor</item>
+        <item name="colorPrimaryDark">@color/e1PrimaryDarkColor</item>
+        <item name="colorAccent">@color/e1SecondaryColor</item>
+        <item name="android:navigationBarColor">@color/e1PrimaryColor</item>
+        <item name="android:colorForeground">@android:color/background_dark</item>
+    </style>
+
+    <style name="Elias2" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorPrimary">@color/e2PrimaryColor</item>
+        <item name="colorPrimaryDark">@color/e2PrimaryDarkColor</item>
+        <item name="colorAccent">@color/e2SecondaryColor</item>
+        <item name="android:navigationBarColor">@color/e2PrimaryColor</item>
+        <item name="android:colorForeground">@android:color/background_dark</item>
+    </style>
+
+    <style name="Jonas" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorPrimary">@color/jPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/jPrimaryDarkColor</item>
+        <item name="colorAccent">@color/jSecondaryColor</item>
+        <item name="android:navigationBarColor">@color/jPrimaryColor</item>
+        <item name="android:colorForeground">@android:color/background_dark</item>
+    </style>
+
 </resources>
