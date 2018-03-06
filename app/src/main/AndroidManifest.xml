@@ -9,25 +9,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".activity.MainActivity"
-            android:windowSoftInputMode="stateHidden"
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:exported="true">
+            android:windowSoftInputMode="stateHidden">
             <intent-filter android:label="@string/filter_channel">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Accepts URIs that begin with "se.newton.chatapp://channel” -->
-                <data android:scheme="se.newton.chatapp"
+                <data
                     android:host="channel"
-                    android:pathPrefix="/"/>
+                    android:pathPrefix="/"
+                    android:scheme="se.newton.chatapp" />
             </intent-filter>
             <intent-filter>
-                <action  android:name="NewMessages" />
+                <action android:name="NewMessages" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LauncherActivity"
+        <activity
+            android:name=".activity.LauncherActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,18 +41,30 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.SettingsActivity" />
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+        <!--
+     Set custom default icon. This is used when no icon is set for incoming notification messages.
      See README(https://goo.gl/l4GJaQ) for more.
-      At the moment with Firebase 11.8 it doesn't work and will just show a round colored circle on Oreo 8.0-->
+      At the moment with Firebase 11.8 it doesn't work and will just show a round colored circle on Oreo 8.0
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_stat_ic_notification" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <!--
+             Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorPrimary" />
-        <!-- Disable crashlytics during debug builds.-->
-        <meta-data android:name="firebase_crashlytics_collection_enabled" android:value="${crashlyticsEnabled}" />
+        <!-- Disable crashlytics during debug builds. -->
+        <meta-data
+            android:name="firebase_crashlytics_collection_enabled"
+            android:value="${crashlyticsEnabled}" />
+
+        <activity
+            android:name=".activity.FullscreenImageActivity"
+            android:label="@string/title_activity_fullscreen_image"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
     </application>
+
 </manifest>

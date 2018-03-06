@@ -1,5 +1,7 @@
 package se.newton.chatapp.viewmodel;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
@@ -22,6 +24,7 @@ import java.util.Date;
 
 import se.newton.chatapp.BR;
 import se.newton.chatapp.R;
+import se.newton.chatapp.activity.FullscreenImageActivity;
 import se.newton.chatapp.model.Message;
 import se.newton.chatapp.model.User;
 import se.newton.chatapp.service.UserManager;
@@ -93,5 +96,12 @@ public class MessageViewModel extends BaseObservable {
             set.clone(viewGroup.getContext(), R.layout.message_item);
             set.applyTo(viewGroup.findViewById(R.id.messageConstraintLayout));
         }
+    }
+
+    public void imageOnClick(View view){
+        Context context = view.getContext();
+        Intent intent = new Intent(context, FullscreenImageActivity.class);
+        intent.putExtra("image_uri", message.getData());
+        context.startActivity(intent);
     }
 }
