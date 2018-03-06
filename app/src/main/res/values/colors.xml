@@ -3,4 +3,45 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- Drago -->
+    <color name="dPrimaryColor">#90caf9</color>
+    <color name="dPrimaryLightColor">#c3fdff</color>
+    <color name="dPrimaryDarkColor">#5d99c6</color>
+    <color name="dSecondaryColor">#fbc02d</color>
+    <color name="dSecondaryLightColor">#fff263</color>
+    <color name="dSecondaryDarkColor">#c49000</color>
+    <color name="dPrimaryTextColor">#000000</color>
+    <color name="dSecondaryTextColor">#000000</color>
+
+    <!-- Elias 1 -->
+    <color name="e1PrimaryColor">#2e4052</color>
+    <color name="e1PrimaryLightColor">#596b7e</color>
+    <color name="e1PrimaryDarkColor">#051a29</color>
+    <color name="e1SecondaryColor">#412234</color>
+    <color name="e1SecondaryLightColor">#6d4b5e</color>
+    <color name="e1SecondaryDarkColor">#1d000d</color>
+    <color name="e1PrimaryTextColor">#ffffff</color>
+    <color name="e1SecondaryTextColor">#ffffff</color>
+
+    <!-- Elias 2 -->
+    <color name="e2PrimaryColor">#ffc857</color>
+    <color name="e2PrimaryLightColor">#fffb88</color>
+    <color name="e2PrimaryDarkColor">#c89825</color>
+    <color name="e2SecondaryColor">#2e4052</color>
+    <color name="e2SecondaryLightColor">#596b7e</color>
+    <color name="e2SecondaryDarkColor">#051a29</color>
+    <color name="e2PrimaryTextColor">#ffffff</color>
+    <color name="e2SecondaryTextColor">#ffffff</color>
+
+    <!-- Jonas -->
+    <color name="jPrimaryColor">#455a64</color>
+    <color name="jPrimaryLightColor">#718792</color>
+    <color name="jPrimaryDarkColor">#1c313a</color>
+    <color name="jSecondaryColor">#9ccc65</color>
+    <color name="jSecondaryLightColor">#cfff95</color>
+    <color name="jSecondaryDarkColor">#6b9b37</color>
+    <color name="jPrimaryTextColor">#ffffff</color>
+    <color name="jSecondaryTextColor">#000000</color>
+
 </resources>
