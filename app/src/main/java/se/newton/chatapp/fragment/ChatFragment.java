@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -60,9 +61,9 @@ public class ChatFragment extends Fragment {
         setRetainInstance(true);
     }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.d(TAG, "Inflating fragment");
         getActivity().setTitle(cid);
         return inflater.inflate(R.layout.fragment_chat, container, false);
@@ -83,10 +84,9 @@ public class ChatFragment extends Fragment {
         activity.findViewById(R.id.buttonSend).setOnClickListener(view -> {
             if(fUser == null){
                 List<AuthUI.IdpConfig> providers = Arrays.asList(
-                        // Email and password
-                        new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
-                        // Google
-                        new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
+                        // Select login methods, save as a List used in the next method call
+                                new AuthUI.IdpConfig.EmailBuilder().build(),
+                                new AuthUI.IdpConfig.GoogleBuilder().build());
 
                 // Create and launch sign-in intent. This is done through startActivityForResult, which
                 // launches an activity from an Intent and calls onActivityResult when this Intent exits.
@@ -119,11 +119,10 @@ public class ChatFragment extends Fragment {
 */
         activity.findViewById(R.id.buttonAttach).setOnClickListener(view -> {
             if(fUser == null){
+                // Select login methods, save as a List used in the next method call
                 List<AuthUI.IdpConfig> providers = Arrays.asList(
-                        // Email and password
-                        new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
-                        // Google
-                        new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
+                        new AuthUI.IdpConfig.EmailBuilder().build(),
+                        new AuthUI.IdpConfig.GoogleBuilder().build());
 
                 // Create and launch sign-in intent. This is done through startActivityForResult, which
                 // launches an activity from an Intent and calls onActivityResult when this Intent exits.
