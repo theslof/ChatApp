@@ -1,7 +1,12 @@
 package se.newton.chatapp.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -40,8 +45,10 @@ public class MainActivity extends AppCompatActivity
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
 
         // -- Firebase --
@@ -95,6 +102,28 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
     }
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        switch (key){
+            case "themeChanger":
+                themeChange(sharedPreferences);
+                break;
+
+        }
+        finish();
+        startActivity(getIntent());
+    }
+    private void themeChange(SharedPreferences sharedPreferences){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        boolean appTheme = sharedPreferences.getBoolean("themeChanger", true);
+        if (appTheme){
+            this.setTheme(R.style.AppTheme);
+        }
+        else {
+            this.setTheme(R.style.Dragomir);
+        }
+
+    }
+
 
     @Override
     protected void onStart() {
