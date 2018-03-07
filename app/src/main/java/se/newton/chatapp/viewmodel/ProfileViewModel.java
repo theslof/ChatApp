@@ -4,13 +4,19 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
 import android.graphics.Bitmap;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.google.firebase.auth.FirebaseAuth;
 
 import se.newton.chatapp.BR;
 import se.newton.chatapp.R;
+import se.newton.chatapp.fragment.ChatFragment;
 import se.newton.chatapp.model.User;
 import se.newton.chatapp.service.Database;
 import se.newton.chatapp.service.UserManager;
@@ -56,9 +62,28 @@ public class ProfileViewModel extends BaseObservable {
             view.setImageBitmap(image);
     }
 
-    public void startPrivateChannelBtn() {
+    public void startPrivateChannelBtn(View v) {
         // Start new chat channel with user
+        String myName = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String hisName = user.getUid();
+        String cid;
+
+        if (myName.compareTo(hisName) < 0) {
+            cid = myName + hisName;
+        } else {
+            cid = hisName + myName;
+        }
+
+        Fragment fragment = ChatFragment.newInstance(cid);
+        AppCompatActivity activity = (AppCompatActivity)v.getContext();
+
+        activity.getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragment, cid)
+                .addToBackStack(cid)
+                .commit();
+
+        Log.d("New channel" , "" + cid);
+
     }
 
 }
-

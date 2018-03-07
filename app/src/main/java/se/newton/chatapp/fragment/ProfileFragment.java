@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import se.newton.chatapp.R;
+import se.newton.chatapp.activity.MainActivity;
 import se.newton.chatapp.service.Database;
 import se.newton.chatapp.viewmodel.ProfileViewModel;
 import se.newton.chatapp.databinding.ProfileFragmentBinding;
