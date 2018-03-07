@@ -186,17 +186,32 @@ public final class Database {
     }
 
     // Get all channels the user is active in
-    public static void getActiveChannels(String uid, Callback<List<Message>> onCompleteCallback) {
+    public static void getActiveChannels(String uid, Callback<List<Channel>> onCompleteCallback) {
         db.collection("channels").whereEqualTo(uid, true)
                 .orderBy("timestamp").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                List<Message> messages = task.getResult().toObjects(Message.class);
-                onCompleteCallback.callback(messages);
+                List<Channel> channels = task.getResult().toObjects(Channel.class);
+                onCompleteCallback.callback(channels);
             } else {
                 Log.d(TAG, task.getException().toString());
                 onCompleteCallback.callback(null);
             }
         });
+    }
+
+    public static void getMyPrivateChannels(Callback<List<Channel>> onCompleteCallback) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db.collection("channels").whereEqualTo(user.getUid(), true)
+                .whereEqualTo("privateChat", true).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                List<Channel> channels = task.getResult().toObjects(Channel.class);
+                onCompleteCallback.callback(channels);
+            } else {
+                Log.d(TAG, task.getException().toString());
+                onCompleteCallback.callback(null);
+            }
+        });
+
     }
 
     // This is used by FirestoreRecyclerAdapter to attach a listener to the query
@@ -243,14 +258,10 @@ public final class Database {
     }
 
     // Subscribe to a channel
-    public static void channelSubscribe(String cid, Callback<Boolean> onCompleteCallback) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null)
+    public static void channelSubscribe(String cid, Map<String, Boolean> users, Callback<Boolean> onCompleteCallback) {
+        if (users == null)
             onCompleteCallback.callback(null);
-        Map<String, Boolean> data = new HashMap<String, Boolean>() {{
-            put(user.getUid(), true);
-        }};
-        db.collection("channels").document(cid).set(data, SetOptions.merge())
+        db.collection("channels").document(cid).set(users, SetOptions.merge())
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         onCompleteCallback.callback(true);
@@ -270,6 +281,22 @@ public final class Database {
             put(user.getUid(), false);
         }};
         db.collection("channels").document(cid).set(data, SetOptions.merge())
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        onCompleteCallback.callback(true);
+                    } else {
+                        Log.d(TAG, task.getException().toString());
+                        onCompleteCallback.callback(false);
+                    }
+                });
+    }
+
+    public static void setPrivate(String cid, boolean p, Callback<Boolean> onCompleteCallback) {
+        if (cid == null)
+            onCompleteCallback.callback(null);
+        Channel c = new Channel(cid);
+        c.setPrivateChat(p);
+        db.collection("channels").document(cid).set(c, SetOptions.merge())
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         onCompleteCallback.callback(true);

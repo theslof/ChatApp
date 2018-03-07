@@ -14,6 +14,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import se.newton.chatapp.BR;
 import se.newton.chatapp.R;
 import se.newton.chatapp.fragment.ChatFragment;
@@ -73,6 +76,14 @@ public class ProfileViewModel extends BaseObservable {
         } else {
             cid = hisName + myName;
         }
+
+        Database.setPrivate(cid, true, res -> {
+            Map<String, Boolean> data = new HashMap<String, Boolean>() {{
+                put(myName, true);
+                put(hisName, true);
+            }};
+            Database.channelSubscribe(cid, data, r -> {});
+        });
 
         Fragment fragment = ChatFragment.newInstance(cid);
         AppCompatActivity activity = (AppCompatActivity)v.getContext();
