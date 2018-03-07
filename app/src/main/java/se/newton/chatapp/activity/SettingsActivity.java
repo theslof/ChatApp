@@ -9,6 +9,7 @@ import android.util.Log;
 
 import se.newton.chatapp.R;
 import se.newton.chatapp.fragment.SettingsFragment;
+import se.newton.chatapp.service.ThemeChanger;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -27,8 +28,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
         };
-        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(listener);
-        themeChange(PreferenceManager.getDefaultSharedPreferences(this));
+       ThemeChanger.changeTheme(PreferenceManager.getDefaultSharedPreferences(this), this );
 
         SettingsFragment settingsFragment = new SettingsFragment();
         getFragmentManager().beginTransaction().replace(R.id.settings_container, settingsFragment).commit();
@@ -42,20 +42,17 @@ public class SettingsActivity extends AppCompatActivity {
 
     private SharedPreferences.OnSharedPreferenceChangeListener listener;
 
-    private void themeChange(SharedPreferences sharedPreferences) {
-        //sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String appTheme = sharedPreferences.getString("themeChanger", "App theme");
-        if (appTheme.equals("App theme")) {
-            this.setTheme(R.style.AppTheme_NoActionBar);
-        } else if (appTheme.equals("Dragomir")) {
-            this.setTheme(R.style.Dragomir);
-        } else if (appTheme.equals("Elias 1")) {
-            this.setTheme(R.style.Elias1);
-        } else if (appTheme.equals("Elias 2")) {
-            this.setTheme(R.style.Elias2);
-        } else if (appTheme.equals("Jonas")) {
-            this.setTheme(R.style.Jonas);
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(listener);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(listener);
+
     }
 
     @Override

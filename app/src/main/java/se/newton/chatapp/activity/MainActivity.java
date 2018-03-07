@@ -33,6 +33,7 @@ import se.newton.chatapp.R;
 import se.newton.chatapp.fragment.ChatFragment;
 import se.newton.chatapp.fragment.ProfileFragment;
 import se.newton.chatapp.model.User;
+import se.newton.chatapp.service.ThemeChanger;
 import se.newton.chatapp.service.UserManager;
 
 public class MainActivity extends AppCompatActivity
@@ -46,22 +47,18 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       //setTheme(R.style.AppTheme_NoActionBar);
         listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
                 switch (key) {
                     case "themeChanger":
-                        //Intent i = getIntent();
-                        //finish();
-                        //startActivity(i);
                         recreate();
                         break;
                 }
             }
         };
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(listener);
-        themeChange(PreferenceManager.getDefaultSharedPreferences(this));
+        ThemeChanger.changeTheme(PreferenceManager.getDefaultSharedPreferences(this),this);
 
         // -- Firebase --
 
@@ -115,23 +112,6 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
     }
-
-    private void themeChange(SharedPreferences sharedPreferences) {
-        //sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String appTheme = sharedPreferences.getString("themeChanger", "App theme");
-        if (appTheme.equals("App theme")) {
-            this.setTheme(R.style.AppTheme_NoActionBar);
-        } else if (appTheme.equals("Dragomir")) {
-            this.setTheme(R.style.Dragomir);
-        } else if (appTheme.equals("Elias 1")) {
-            this.setTheme(R.style.Elias1);
-        } else if (appTheme.equals("Elias 2")) {
-            this.setTheme(R.style.Elias2);
-        } else if (appTheme.equals("Jonas")) {
-            this.setTheme(R.style.Jonas);
-        }
-    }
-
 
     @Override
     protected void onStart() {
