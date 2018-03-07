@@ -29,6 +29,7 @@ import se.newton.chatapp.model.Channel;
 import se.newton.chatapp.model.Message;
 import se.newton.chatapp.pushnotify.Messaging;
 import se.newton.chatapp.service.AdapterManager;
+import se.newton.chatapp.service.ChannelManager;
 import se.newton.chatapp.service.Database;
 import se.newton.chatapp.service.Storage;
 

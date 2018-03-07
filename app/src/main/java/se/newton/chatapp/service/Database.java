@@ -9,6 +9,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.Date;
@@ -138,6 +139,8 @@ public final class Database {
 
     // Get existing channel from Firestore, returns null on error
     public static void getChannel(String cid, Callback<Channel> onCompleteCallback) {
+        if (cid == null)
+            onCompleteCallback.callback(null);
         db.collection("channels").document(cid).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult().exists()) {
@@ -209,7 +212,7 @@ public final class Database {
     // This is used by FirestoreRecyclerAdapter to attach a listener to the query
     public static void getAllPrivateConversations(Callback<List<Message>> onCompleteCallback) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user == null)
+        if (user == null)
             onCompleteCallback.callback(null);
         db.collection("channels").whereEqualTo("privateChat", true).whereEqualTo(user.getUid(), true)
                 .get().addOnCompleteListener(task -> {
@@ -240,11 +243,11 @@ public final class Database {
     }
 
     // Subscribe to a channel
-    public static void channelSubscribe(String cid, Callback<Boolean> onCompleteCallback){
+    public static void channelSubscribe(String cid, Callback<Boolean> onCompleteCallback) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user == null)
+        if (user == null)
             onCompleteCallback.callback(null);
-        Map<String, Boolean> data = new HashMap<String, Boolean>(){{
+        Map<String, Boolean> data = new HashMap<String, Boolean>() {{
             put(user.getUid(), true);
         }};
         db.collection("channels").document(cid).set(data, SetOptions.merge())
@@ -259,11 +262,11 @@ public final class Database {
     }
 
     // Unsubscribe from a channel
-    public static void channelUnsubscribe(String cid, Callback<Boolean> onCompleteCallback){
+    public static void channelUnsubscribe(String cid, Callback<Boolean> onCompleteCallback) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user == null)
+        if (user == null)
             onCompleteCallback.callback(null);
-        Map<String, Boolean> data = new HashMap<String, Boolean>(){{
+        Map<String, Boolean> data = new HashMap<String, Boolean>() {{
             put(user.getUid(), false);
         }};
         db.collection("channels").document(cid).set(data, SetOptions.merge())
