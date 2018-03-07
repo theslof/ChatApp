@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -116,7 +117,8 @@ public class ChatFragment extends Fragment {
                 //  animation in the mean time.
                 Database.createMessage(Message.TYPE_TEXT, messageText.getText().toString(),
                         channel.getCid(), m -> {});
-                Database.channelSubscribe(channel.getCid(), b -> {});
+                Database.channelSubscribe(channel.getCid(),
+                        new HashMap<String, Boolean>(){{ put(fUser.getUid(), true);}}, b -> {});
                 messageText.setText("");
             }
         });
