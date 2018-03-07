@@ -9,6 +9,7 @@ public class Message {
     public static final int TYPE_IMAGE = 1;
 
     private String uid;
+    private String receiver;
     private String mid;
     private String cid;
     private String data;
@@ -74,5 +75,13 @@ public class Message {
 
     public void setMessageType(int messageType) {
         this.messageType = messageType;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String reciever) {
+        this.receiver = reciever;
     }
 }

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -11,7 +12,9 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import se.newton.chatapp.model.Channel;
 import se.newton.chatapp.model.Message;
@@ -60,15 +63,16 @@ public final class Database {
     }
 
     // Creates a new channel, or returns existing channel if it already exists.
-    public static void createChannel(String cid, Callback<Channel> onCompleteCallback) {
-        db.collection("channels").document(cid).get()
+    public static void createChannel(Channel channel, Callback<Channel> onCompleteCallback) {
+        if(channel == null || channel.getCid() == null)
+            onCompleteCallback.callback(null);
+        db.collection("channels").document(channel.getCid()).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         DocumentSnapshot doc = task.getResult();
                         if (doc.exists()) {
                             onCompleteCallback.callback(doc.toObject(Channel.class));
                         } else {
-                            Channel channel = new Channel(cid);
                             doc.getReference().set(channel).addOnCompleteListener(res -> {
                                 if (res.isSuccessful()) {
                                     onCompleteCallback.callback(channel);
@@ -88,9 +92,18 @@ public final class Database {
 
     // Creates a new message and returns a Message object
     public static void createMessage(int messageType, String data, String cid, Callback<Message> onCompleteCallback) {
+        createMessage(messageType, data, cid, null, onCompleteCallback);
+    }
+
+    public static void createMessage(int messageType, String data, String cid,
+                                     String receiver, Callback<Message> onCompleteCallback) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null || (cid == null && receiver == null))
+            onCompleteCallback.callback(null);
         DocumentReference doc = db.collection("messages").document();
         Message message = new Message(messageType, data);
         message.setCid(cid);
+        message.setReceiver(receiver);
         message.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
         message.setMid(doc.getId());
         doc.set(message)
@@ -169,9 +182,9 @@ public final class Database {
         });
     }
 
-    // Get all messages from channel as a list
-    public static void getMessagesByChannel(String cid, Callback<List<Message>> onCompleteCallback) {
-        db.collection("messages").whereEqualTo("cid", cid)
+    // Get all channels the user is active in
+    public static void getActiveChannels(String uid, Callback<List<Message>> onCompleteCallback) {
+        db.collection("channels").whereEqualTo(uid, true)
                 .orderBy("timestamp").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 List<Message> messages = task.getResult().toObjects(Message.class);
@@ -193,6 +206,23 @@ public final class Database {
 
     }
 
+    // This is used by FirestoreRecyclerAdapter to attach a listener to the query
+    public static void getAllPrivateConversations(Callback<List<Message>> onCompleteCallback) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user == null)
+            onCompleteCallback.callback(null);
+        db.collection("channels").whereEqualTo("privateChat", true).whereEqualTo(user.getUid(), true)
+                .get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                List<Message> messages = task.getResult().toObjects(Message.class);
+                onCompleteCallback.callback(messages);
+            } else {
+                Log.d(TAG, task.getException().toString());
+                onCompleteCallback.callback(null);
+            }
+        });
+    }
+
 
     // -- UPDATE --
 
@@ -205,6 +235,44 @@ public final class Database {
                     } else {
                         Log.d(TAG, task.getException().toString());
                         onCompleteCallback.callback(null);
+                    }
+                });
+    }
+
+    // Subscribe to a channel
+    public static void channelSubscribe(String cid, Callback<Boolean> onCompleteCallback){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user == null)
+            onCompleteCallback.callback(null);
+        Map<String, Boolean> data = new HashMap<String, Boolean>(){{
+            put(user.getUid(), true);
+        }};
+        db.collection("channels").document(cid).set(data, SetOptions.merge())
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        onCompleteCallback.callback(true);
+                    } else {
+                        Log.d(TAG, task.getException().toString());
+                        onCompleteCallback.callback(false);
+                    }
+                });
+    }
+
+    // Unsubscribe from a channel
+    public static void channelUnsubscribe(String cid, Callback<Boolean> onCompleteCallback){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user == null)
+            onCompleteCallback.callback(null);
+        Map<String, Boolean> data = new HashMap<String, Boolean>(){{
+            put(user.getUid(), false);
+        }};
+        db.collection("channels").document(cid).set(data, SetOptions.merge())
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        onCompleteCallback.callback(true);
+                    } else {
+                        Log.d(TAG, task.getException().toString());
+                        onCompleteCallback.callback(false);
                     }
                 });
     }
