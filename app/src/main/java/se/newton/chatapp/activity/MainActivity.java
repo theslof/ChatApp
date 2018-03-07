@@ -146,6 +146,14 @@ public class MainActivity extends AppCompatActivity
             String uid = user.getUid();
         }
 
+        View fireView = navigationView.getHeaderView(0);
+        TextView nav_user_fire = (TextView) fireView.findViewById(R.id.nameView);
+        nav_user_fire.setText(user.getDisplayName());
+        TextView nav_mail_fire = (TextView) fireView.findViewById(R.id.mailView);
+        nav_mail_fire.setText(user.getEmail());
+        ImageView nav_img_fire = (ImageView) fireView.findViewById(R.id.imageView);
+        nav_img_fire.setImageURI(user.getPhotoUrl());
+
         // -- Google sign in user info --
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         Uri personPhoto = null;
