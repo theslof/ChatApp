@@ -16,7 +16,6 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(null,"SettingsActivity");
-        super.onCreate(savedInstanceState);
 
         listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
@@ -28,7 +27,9 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
         };
-       ThemeChanger.changeTheme(PreferenceManager.getDefaultSharedPreferences(this), this );
+        ThemeChanger.changeTheme(PreferenceManager.getDefaultSharedPreferences(this), this );
+       
+        super.onCreate(savedInstanceState);
 
         SettingsFragment settingsFragment = new SettingsFragment();
         getFragmentManager().beginTransaction().replace(R.id.settings_container, settingsFragment).commit();

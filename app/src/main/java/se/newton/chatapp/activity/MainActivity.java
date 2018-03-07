@@ -46,8 +46,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+          listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
                 switch (key) {
@@ -59,6 +58,8 @@ public class MainActivity extends AppCompatActivity
         };
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(listener);
         ThemeChanger.changeTheme(PreferenceManager.getDefaultSharedPreferences(this),this);
+
+        super.onCreate(savedInstanceState);
 
         // -- Firebase --
 

@@ -33,7 +33,7 @@ exports.newmessage = functions.firestore
         cid : cid
       },
       topic: cid
-      };
+   };
 
    return defaultMessaging.send(message)
       .then((response) => {

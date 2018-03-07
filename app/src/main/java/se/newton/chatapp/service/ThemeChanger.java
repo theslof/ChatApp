@@ -2,6 +2,7 @@ package se.newton.chatapp.service;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatDelegate;
 
 import se.newton.chatapp.R;
 
@@ -11,7 +12,7 @@ import se.newton.chatapp.R;
 
 public class ThemeChanger {
 
-  public static void changeTheme(SharedPreferences sharedPreferences, Context context) {
+    public static void changeTheme(SharedPreferences sharedPreferences, Context context) {
         //sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String appTheme = sharedPreferences.getString("themeChanger", "App theme");
         if (appTheme.equals("App theme")) {
@@ -24,6 +25,10 @@ public class ThemeChanger {
             context.setTheme(R.style.Elias2);
         } else if (appTheme.equals("Jonas")) {
             context.setTheme(R.style.Jonas);
+        } else if (appTheme.equals("Day and Night")) {
+            context.setTheme(R.style.DayNight);
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_AUTO);
         }
     }
 }

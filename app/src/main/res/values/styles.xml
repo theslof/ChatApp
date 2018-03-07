@@ -54,4 +54,6 @@
         <item name="android:colorForeground">@android:color/background_dark</item>
     </style>
 
+    <style name="DayNight" parent="Theme.AppCompat.DayNight.NoActionBar" >
+    </style>
 </resources>
