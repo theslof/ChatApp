@@ -53,11 +53,10 @@ public class ChatFragment extends Fragment {
     // Use this method to create a new ChatFragment instead of calling the constructor. Here we can
     //  pass arguments if needed.
     // cid - ID of the channel that is to be displayed in the fragment.
-    public static ChatFragment newInstance(RequestManager glideManager, String cid) {
+    public static ChatFragment newInstance(String cid) {
         Log.d(TAG, "Creating a new fragment");
         ChatFragment fragment = new ChatFragment();
         fragment.channel = new Channel(cid);
-        fragment.viewModel = ChannelViewModel.getViewModel(glideManager, cid);
         Messaging.subscribeToTopic(cid);
         Database.createChannel(fragment.channel, c -> {
             fragment.channel = c;
@@ -76,6 +75,7 @@ public class ChatFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.d(TAG, "Inflating fragment");
         getActivity().setTitle(channel.getCid());
+        this.viewModel = ChannelViewModel.getViewModel(Glide.with(getContext()), this.channel.getCid());
         return inflater.inflate(R.layout.fragment_chat, container, false);
     }
 

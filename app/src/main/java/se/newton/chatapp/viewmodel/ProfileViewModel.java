@@ -54,14 +54,6 @@ public class ProfileViewModel extends BaseObservable {
         return user.getBio();
     }
 
-    @BindingAdapter("android:profile")
-    public static void loadProfileImage(ImageView view, Bitmap image) {
-        if (image == null)
-            view.setImageResource(R.drawable.ic_profile_image_placeholder);
-        else
-            view.setImageBitmap(image);
-    }
-
     public void startPrivateChannelBtn(View v) {
         // Start new chat channel with user
         String myName = FirebaseAuth.getInstance().getCurrentUser().getUid();

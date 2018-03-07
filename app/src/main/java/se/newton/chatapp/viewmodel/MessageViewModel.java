@@ -63,14 +63,6 @@ public class MessageViewModel extends BaseObservable {
         return dateFormat.format(message.getTimestamp());
     }
 
-    @BindingAdapter("android:profile")
-    public static void loadProfileImage(ImageView view, Bitmap image) {
-        if (image == null)
-            view.setImageResource(R.drawable.ic_profile_image_placeholder_circular);
-        else
-            view.setImageBitmap(image);
-    }
-
     @BindingAdapter("android:image")
     public static void loadImage(ImageView view, String imageUrl) {
         Glide.with(view.getContext())

@@ -23,7 +23,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="60dp"
             android:contentDescription="@string/profile_image"
-            android:profile="@{viewModel.user.profileBitmap}"
+            app:profile="@{viewModel.user.profileBitmap}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
