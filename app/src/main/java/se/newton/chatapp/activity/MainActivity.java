@@ -163,6 +163,26 @@ public class MainActivity extends AppCompatActivity
         // -- Side drawer user info --
         // TODO: Use data from our own Firebase User instead, as this may crash if user does not log in via Google.
         // Use databinding instead, so it updates as the user profile is edited? Or move this to onStart?
+
+
+        // -- Firebase user info --
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+            Uri photoUrl = user.getPhotoUrl();
+
+            // Check if user's email is verified
+            boolean emailVerified = user.isEmailVerified();
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getToken() instead.
+            String uid = user.getUid();
+        }
+
+        // -- Google sign in user info --
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         Uri personPhoto = null;
         if (acct != null) {
@@ -187,6 +207,9 @@ public class MainActivity extends AppCompatActivity
                 .apply(RequestOptions.placeholderOf(
                         R.drawable.ic_profile_image_placeholder_circular))
                 .into(nav_img);
+
+        // -- Show dot notification --
+        navigationView.getMenu().getItem(0).setActionView(R.layout.menu_dot);
 
         // -- Dynamic Menu Option --
         addMenuItemInNavMenuDrawer();
