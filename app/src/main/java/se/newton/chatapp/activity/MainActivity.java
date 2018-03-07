@@ -1,15 +1,10 @@
 package se.newton.chatapp.activity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,7 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -52,22 +46,19 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.AppTheme_NoActionBar);
-        listener = new SharedPreferences.OnSharedPreferenceChangeListener(){
+       //setTheme(R.style.AppTheme_NoActionBar);
+        listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                switch (key){
+                switch (key) {
                     case "themeChanger":
-
-                        startActivity(getIntent());
-                        finish();
+                        //Intent i = getIntent();
+                        //finish();
+                        //startActivity(i);
+                        recreate();
                         break;
-
                 }
-
-
             }
-
         };
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(listener);
         themeChange(PreferenceManager.getDefaultSharedPreferences(this));
@@ -125,26 +116,18 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
     }
 
-
-
-
-    private void themeChange(SharedPreferences sharedPreferences){
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+    private void themeChange(SharedPreferences sharedPreferences) {
+        //sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String appTheme = sharedPreferences.getString("themeChanger", "App theme");
-        if (appTheme.equals("App theme")){
+        if (appTheme.equals("App theme")) {
             this.setTheme(R.style.AppTheme_NoActionBar);
-
-        }
-        else if (appTheme.equals("Dragomir")) {
+        } else if (appTheme.equals("Dragomir")) {
             this.setTheme(R.style.Dragomir);
-        }
-        else if(appTheme.equals("Elias 1")){
+        } else if (appTheme.equals("Elias 1")) {
             this.setTheme(R.style.Elias1);
-        }
-        else if(appTheme.equals("Elias 2")){
+        } else if (appTheme.equals("Elias 2")) {
             this.setTheme(R.style.Elias2);
-        }
-        else if(appTheme.equals("Jonas")){
+        } else if (appTheme.equals("Jonas")) {
             this.setTheme(R.style.Jonas);
         }
     }
@@ -310,10 +293,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
-            return true;
-
         }
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -369,7 +349,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void viewUser(View v) {
-        Log.d("View profile uid" ,v.getTag().toString());
+        Log.d("View profile uid", v.getTag().toString());
         openProfile(v.getTag().toString());
     }
 }
