@@ -60,7 +60,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
-            android:onClick="@{() -> viewModel.startPrivateChannelBtn()}"
+            android:onClick="@{(v) -> viewModel.startPrivateChannelBtn(v)}"
             android:text="@string/start_private_channel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
