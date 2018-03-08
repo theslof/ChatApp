@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.text.Normalizer;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,15 +60,21 @@ public class ProfileViewModel extends BaseObservable {
 
     public void startPrivateChannelBtn(View v) {
         // Start new chat channel with user
-        String myName = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String hisName = user.getUid();
-        String cid;
+        //String myName = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        //String hisName = user.getUid();
+        String myName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        String hisName = user.getDisplayName();
+        String cidun;
 
         if (myName.compareTo(hisName) < 0) {
-            cid = myName + hisName;
+            cidun = myName + "-" + hisName;
         } else {
-            cid = hisName + myName;
+            cidun = hisName + "-" + myName;
         }
+
+        String cid = cidun.replaceAll("\\s","")
+                .replaceAll("[åäöÅÄÖ]","");
+
 
         Database.setPrivate(cid, true, res -> {
             Map<String, Boolean> data = new HashMap<String, Boolean>() {{
