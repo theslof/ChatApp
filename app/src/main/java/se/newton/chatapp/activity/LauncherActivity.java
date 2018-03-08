@@ -88,7 +88,7 @@ public class LauncherActivity extends AppCompatActivity {
                 // them from the Firebase account
                 if (user.getProfileImage() == null)
                     user.setProfileImage(fUser.getPhotoUrl().toString());
-                if (user.getDisplayName() == null)
+                if (user.getDisplayName() == null || user.getDisplayName().equals("Anonymous"))
                     user.setDisplayName(fUser.getDisplayName());
                 Database.updateUser(user, u -> {
                     Intent intent = new Intent(this, MainActivity.class);
