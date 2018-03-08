@@ -288,6 +288,8 @@ public class MainActivity extends AppCompatActivity
             AuthUI.getInstance()
                     .signOut(this)
                     .addOnCompleteListener(task -> {
+                        Intent intent = new Intent(this, LauncherActivity.class);
+                        startActivity(intent);
                         finish();
                     });
         } else if (id == R.id.nav_open_channel) {
