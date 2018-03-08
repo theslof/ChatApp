@@ -19,10 +19,6 @@
     </PreferenceCategory>
     <PreferenceCategory android:title="Account">
 
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key=""
-            android:title="Show as offline" />
         <EditTextPreference
             android:selectAllOnFocus="true"
             android:title="Edit profile"/>
