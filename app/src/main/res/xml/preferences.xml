@@ -6,6 +6,7 @@
 
 
         <EditTextPreference
+            android:key="pref_language"
             android:defaultValue="English"
             android:selectAllOnFocus="true"
             android:singleLine="true"
@@ -20,12 +21,14 @@
     <PreferenceCategory android:title="Account">
 
         <EditTextPreference
+            android:key="pref_edit_profile"
             android:selectAllOnFocus="true"
             android:title="Edit profile"/>
 
     </PreferenceCategory>
     <PreferenceCategory android:title="Other">
         <EditTextPreference
+            android:key="pref_about"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:title="About">
