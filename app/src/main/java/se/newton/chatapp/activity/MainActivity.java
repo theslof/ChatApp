@@ -33,6 +33,7 @@ import se.newton.chatapp.R;
 import se.newton.chatapp.fragment.ChatFragment;
 import se.newton.chatapp.fragment.ProfileFragment;
 import se.newton.chatapp.model.User;
+import se.newton.chatapp.service.Database;
 import se.newton.chatapp.service.ThemeChanger;
 import se.newton.chatapp.service.UserManager;
 
@@ -155,14 +156,15 @@ public class MainActivity extends AppCompatActivity
         nav_img_fire.setImageURI(user.getPhotoUrl());
 
         // -- Google sign in user info --
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        FirebaseUser acct = FirebaseAuth.getInstance().getCurrentUser();
+        //GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         Uri personPhoto = null;
         if (acct != null) {
             String personName = acct.getDisplayName();
-            String personGivenName = acct.getGivenName();
-            String personFamilyName = acct.getFamilyName();
+            //String personGivenName = acct.getGivenName();
+            //String personFamilyName = acct.getFamilyName();
             String personEmail = acct.getEmail();
-            String personId = acct.getId();
+            //String personId = acct.getId();
             personPhoto = acct.getPhotoUrl();
         }
 
@@ -193,6 +195,10 @@ public class MainActivity extends AppCompatActivity
 
         Menu menu = navView.getMenu();
         Menu submenu = menu.addSubMenu("Channels");
+
+        Database.getActiveChannels(fUser.getUid(), res -> {
+            //Log.d("Channels", " " + res.get(0).toString());
+        });
 
         submenu.add("Channel 1");
         submenu.add("Channel 2");
