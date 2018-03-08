@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity
 
         if (savedInstanceState == null) {
 
-            //TODO: Implement another landing page, perhaps latest channel viewed
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
             //When started after clicking on Cloud Message Notification
             String cid = getIntent().getStringExtra("cid");
@@ -93,8 +93,11 @@ public class MainActivity extends AppCompatActivity
                 cid = data.getLastPathSegment();
             }
 
-            if (cid == null)
-                cid = "MyTestChannel";
+            if (cid == null) {
+
+                // Get last visited channel
+                cid = sharedPreferences.getString(getString(R.string.last_channel), "Welcome");
+            }
 
             // Create a new chat fragment that will show all messages sent to channel cid
             openChannel(cid, true);

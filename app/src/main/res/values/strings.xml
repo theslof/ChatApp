@@ -20,6 +20,8 @@
     <string name="friends">Friends</string>
     <string name="error_unknown_message_type">Error: Unknown message type!</string>
     <string name="title_activity_fullscreen_image">FullscreenImageActivity</string>
+    <string name="last_channel">lastViewedChannel</string>
+    <string name="last_channel">lastViewedChannel</string>
 
     <string-array name="theme_values">
         <item>App theme</item>
