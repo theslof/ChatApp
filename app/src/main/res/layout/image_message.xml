@@ -14,7 +14,8 @@
         android:id="@+id/textViewMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:image="@{data.messageText}"
+        app:imageUrl="@{data.messageText}"
+        app:placeholder="@{@drawable/ic_profile_image_placeholder}"
         android:contentDescription="@string/image_message"
         android:onClick="@{view -> data.imageOnClick(view)}"
         tools:text="TEXT_DATA" />

@@ -4,18 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.databinding.BindingAdapter;
-import android.graphics.Bitmap;
 import android.support.constraint.ConstraintSet;
 import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.DateFormat;
@@ -61,17 +56,6 @@ public class MessageViewModel extends BaseObservable {
     @Bindable
     public String getTimestamp() {
         return dateFormat.format(message.getTimestamp());
-    }
-
-    @BindingAdapter("android:image")
-    public static void loadImage(ImageView view, String imageUrl) {
-        Glide.with(view.getContext())
-                .load(imageUrl)
-                .apply(new RequestOptions()
-                        .placeholder(R.drawable.ic_profile_image_placeholder)
-                        .override(300)
-                )
-                .into(view);
     }
 
     public void setOrientation(View view) {
