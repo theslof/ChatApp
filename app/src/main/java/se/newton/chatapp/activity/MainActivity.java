@@ -202,15 +202,14 @@ public class MainActivity extends AppCompatActivity
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
 
         Menu menu = navView.getMenu();
-        Menu submenu = menu.addSubMenu("Channels");
+        Menu submenu = menu.addSubMenu("My Channels");
 
+        submenu.clear();
         Database.getActiveChannels(fUser.getUid(), res -> {
-            //Log.d("Channels", " " + res.get(0).toString());
+            for (int i = 0; i < res.size(); i++) {
+                submenu.add(res.get(i).getCid());
+            }
         });
-
-        submenu.add("Channel 1");
-        submenu.add("Channel 2");
-        submenu.add("Channel 3");
 
         navView.invalidate();
     }
@@ -364,7 +363,7 @@ public class MainActivity extends AppCompatActivity
         EditText channelInput = new EditText(this);
         channelInput.setLayoutParams(new RelativeLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        builder.setTitle("Open channel")
+        builder.setTitle("Open Channel")
                 .setView(channelInput);
         // Add the buttons
         builder.setPositiveButton("OK", (dialog, id) -> {

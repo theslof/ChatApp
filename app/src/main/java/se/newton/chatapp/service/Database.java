@@ -188,7 +188,7 @@ public final class Database {
     // Get all channels the user is active in
     public static void getActiveChannels(String uid, Callback<List<Channel>> onCompleteCallback) {
         db.collection("channels").whereEqualTo(uid, true)
-                .orderBy("timestamp").get().addOnCompleteListener(task -> {
+               .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 List<Channel> channels = task.getResult().toObjects(Channel.class);
                 onCompleteCallback.callback(channels);
