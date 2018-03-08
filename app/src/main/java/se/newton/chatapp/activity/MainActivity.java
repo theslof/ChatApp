@@ -3,19 +3,23 @@ package se.newton.chatapp.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,6 +52,8 @@ public class MainActivity extends AppCompatActivity
     private final static String TAG = "MainActivity";
     private FirebaseUser fUser;
     private FragmentManager fragmentManager = getSupportFragmentManager();
+
+    TextView slideshow,gallery;
 
     private SharedPreferences.OnSharedPreferenceChangeListener listener;
 
@@ -198,7 +204,35 @@ public class MainActivity extends AppCompatActivity
 
         // -- Dynamic Menu Option --
         addMenuItemInNavMenuDrawer();
+
+
+/*
+//These lines should be added in the OnCreate() of your main activity
+        navigationView.setNavigationItemSelectedListener(this);
+
+        gallery=(TextView) MenuItemCompat.getActionView(navigationView.getMenu().
+                findItem(R.id.nav_gallery));
+
+        slideshow=(TextView) MenuItemCompat.getActionView(navigationView.getMenu().
+                findItem(R.id.nav_slideshow));
+
+//This method will initialize the count value
+        initializeCountDrawer();*/
+
     }
+
+    /*private void initializeCountDrawer(){
+
+        //Gravity property aligns the text
+        gallery.setGravity(Gravity.CENTER_VERTICAL);
+        gallery.setTypeface(null, Typeface.BOLD);
+        gallery.setTextColor(getResources().getColor(R.color.colorAccent));
+        gallery.setText("99+");
+        slideshow.setGravity(Gravity.CENTER_VERTICAL);
+        slideshow.setTypeface(null,Typeface.BOLD);                                                                                                                    slideshow.setTextColor(getResources().getColor(R.color.colorAccent));
+        //count is added
+        slideshow.setText("7");
+    }*/
 
     // -- Method For Dynamic Menu --
     private void addMenuItemInNavMenuDrawer() {
@@ -280,13 +314,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_channel_one) {
-
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_log_out) {
+        if (id == R.id.nav_log_out) {
             AuthUI.getInstance()
                     .signOut(this)
                     .addOnCompleteListener(task -> {

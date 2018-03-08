@@ -1,22 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
-
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_channel_one"
-            android:icon="@drawable/ic_looks_one_black_24dp"
-            android:title="Channel One" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-    </group>
 
     <item android:title="Extra">
         <menu>
@@ -37,6 +23,11 @@
                 android:id="@+id/nav_log_out"
                 android:icon="@drawable/ic_power_settings_new_black_24dp"
                 android:title="@string/log_out"/>
+            <item
+                android:id="@+id/app_bar_switch"
+                android:icon="@drawable/ic_chatapp_icon"
+                android:title="Switch"
+                app:actionLayout="@layout/switch_item" />
 
         </menu>
 
