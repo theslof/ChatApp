@@ -21,6 +21,10 @@
     <item android:title="Extra">
         <menu>
             <item
+                android:id="@+id/nav_open_channel"
+                android:icon="@drawable/ic_forum_black_24dp"
+                android:title="Open channel" />
+            <item
                 android:id="@+id/nav_my_profile"
                 android:icon="@drawable/nav_my_profile"
                 android:title="@string/my_profile" />

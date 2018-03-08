@@ -1,5 +1,6 @@
 package se.newton.chatapp.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -11,13 +12,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -283,6 +288,8 @@ public class MainActivity extends AppCompatActivity
                         finish();
                     });
 
+        } else if (id == R.id.nav_open_channel) {
+            channelPicker();
         } else if (id == R.id.nav_my_profile) {
             openProfile(fUser.getUid());
         } else if (id == R.id.nav_settings) {
@@ -346,6 +353,27 @@ public class MainActivity extends AppCompatActivity
     public void viewUser(View v) {
         Log.d("View profile uid", v.getTag().toString());
         openProfile(v.getTag().toString());
+    }
+
+    public void channelPicker(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // Set other dialog properties
+        EditText channelInput = new EditText(this);
+        channelInput.setLayoutParams(new RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        builder.setTitle("Open channel")
+                .setView(channelInput);
+        // Add the buttons
+        builder.setPositiveButton("OK", (dialog, id) -> {
+            openChannel(channelInput.getText().toString());
+        });
+        builder.setNegativeButton("Cancel", (dialog, id) -> {
+            // User cancelled the dialog
+        });
+
+        // Create the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
 
