@@ -94,11 +94,13 @@ public class MainActivity extends AppCompatActivity
                 cid = data.getLastPathSegment();
             }
 
-            if (cid == null) {
+            if (cid == null && fUser != null) {
 
                 // Get last visited channel
-                cid = sharedPreferences.getString(getString(R.string.last_channel), "Welcome");
+                cid = sharedPreferences.getString(getString(R.string.last_channel) + fUser.getUid(), "Welcome");
             }
+
+            cid = cid == null ? "Welcome" : cid;
 
             // Create a new chat fragment that will show all messages sent to channel cid
             openChannel(cid, true);

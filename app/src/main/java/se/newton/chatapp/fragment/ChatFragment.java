@@ -156,9 +156,11 @@ public class ChatFragment extends Fragment {
         super.onResume();
         fUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        // Remember last visited channel
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getContext());
-        sharedPreferences.edit().putString(getString(R.string.last_channel), channel.getCid()).apply();
+        if(fUser != null) {
+            // Remember last visited channel
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getContext());
+            sharedPreferences.edit().putString(getString(R.string.last_channel) + fUser.getUid(), channel.getCid()).apply();
+        }
     }
 
     // -- Launch image picker to upload to Firebase and send as a message --
