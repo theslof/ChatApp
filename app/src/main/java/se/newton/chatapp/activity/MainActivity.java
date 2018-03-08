@@ -202,12 +202,12 @@ public class MainActivity extends AppCompatActivity
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
 
         Menu menu = navView.getMenu();
-        Menu submenu = menu.addSubMenu("My Channels");
+        menu.removeItem(123);
+        Menu submenu = menu.addSubMenu(0, 123, 1, "My Channels");
 
-        submenu.clear();
         Database.getActiveChannels(fUser.getUid(), res -> {
             for (int i = 0; i < res.size(); i++) {
-                submenu.add(res.get(i).getCid());
+                submenu.add(1, i, 1, res.get(i).getCid());
             }
         });
 
@@ -289,7 +289,6 @@ public class MainActivity extends AppCompatActivity
                     .addOnCompleteListener(task -> {
                         finish();
                     });
-
         } else if (id == R.id.nav_open_channel) {
             channelPicker();
         } else if (id == R.id.nav_my_profile) {
@@ -297,6 +296,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
+        } else if (item.getGroupId() == 1) {
+            openChannel(item.getTitle().toString());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
