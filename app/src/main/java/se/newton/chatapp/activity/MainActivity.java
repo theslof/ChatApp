@@ -297,7 +297,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
             SettingsFragment settingsFragment = new SettingsFragment();
             fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, settingsFragment)
+                    .replace(R.id.fragment_container, settingsFragment, "settings")
                     .addToBackStack("settings").commit();
         } else if (item.getGroupId() == 1) {
             openChannel(item.getTitle().toString());
