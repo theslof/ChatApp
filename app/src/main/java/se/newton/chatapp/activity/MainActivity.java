@@ -37,6 +37,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import se.newton.chatapp.R;
 import se.newton.chatapp.fragment.ChatFragment;
 import se.newton.chatapp.fragment.ProfileFragment;
+import se.newton.chatapp.fragment.SettingsFragment;
 import se.newton.chatapp.model.User;
 import se.newton.chatapp.service.Database;
 import se.newton.chatapp.service.ThemeChanger;
@@ -294,8 +295,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_my_profile) {
             openProfile(fUser.getUid());
         } else if (id == R.id.nav_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
+            SettingsFragment settingsFragment = new SettingsFragment();
+            getFragmentManager().beginTransaction().replace(R.id.fragment_container, settingsFragment).commit();
         } else if (item.getGroupId() == 1) {
             openChannel(item.getTitle().toString());
         }
