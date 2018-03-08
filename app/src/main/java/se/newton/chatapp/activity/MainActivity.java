@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity
     private FirebaseUser fUser;
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
-    TextView slideshow,gallery;
-
     private SharedPreferences.OnSharedPreferenceChangeListener listener;
 
     @Override
@@ -200,39 +198,13 @@ public class MainActivity extends AppCompatActivity
                 .into(nav_img);
 
         // -- Show dot notification --
-        navigationView.getMenu().getItem(0).setActionView(R.layout.menu_dot);
+        //navigationView.getMenu().getItem(0).setActionView(R.layout.menu_dot);
 
         // -- Dynamic Menu Option --
         addMenuItemInNavMenuDrawer();
 
-
-/*
-//These lines should be added in the OnCreate() of your main activity
-        navigationView.setNavigationItemSelectedListener(this);
-
-        gallery=(TextView) MenuItemCompat.getActionView(navigationView.getMenu().
-                findItem(R.id.nav_gallery));
-
-        slideshow=(TextView) MenuItemCompat.getActionView(navigationView.getMenu().
-                findItem(R.id.nav_slideshow));
-
-//This method will initialize the count value
-        initializeCountDrawer();*/
-
     }
 
-    /*private void initializeCountDrawer(){
-
-        //Gravity property aligns the text
-        gallery.setGravity(Gravity.CENTER_VERTICAL);
-        gallery.setTypeface(null, Typeface.BOLD);
-        gallery.setTextColor(getResources().getColor(R.color.colorAccent));
-        gallery.setText("99+");
-        slideshow.setGravity(Gravity.CENTER_VERTICAL);
-        slideshow.setTypeface(null,Typeface.BOLD);                                                                                                                    slideshow.setTextColor(getResources().getColor(R.color.colorAccent));
-        //count is added
-        slideshow.setText("7");
-    }*/
 
     // -- Method For Dynamic Menu --
     private void addMenuItemInNavMenuDrawer() {
