@@ -65,7 +65,7 @@ public final class Database {
 
     // Creates a new channel, or returns existing channel if it already exists.
     public static void createChannel(Channel channel, Callback<Channel> onCompleteCallback) {
-        if(channel == null || channel.getCid() == null)
+        if (channel == null || channel.getCid() == null)
             onCompleteCallback.callback(null);
         db.collection("channels").document(channel.getCid()).get()
                 .addOnCompleteListener(task -> {
@@ -137,6 +137,7 @@ public final class Database {
                 });
     }
 
+
     // Get existing channel from Firestore, returns null on error
     public static void getChannel(String cid, Callback<Channel> onCompleteCallback) {
         if (cid == null)
@@ -188,7 +189,7 @@ public final class Database {
     // Get all channels the user is active in
     public static void getActiveChannels(String uid, Callback<List<Channel>> onCompleteCallback) {
         db.collection("channels").whereEqualTo(uid, true)
-               .get().addOnCompleteListener(task -> {
+                .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 List<Channel> channels = task.getResult().toObjects(Channel.class);
                 onCompleteCallback.callback(channels);

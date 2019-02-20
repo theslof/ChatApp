@@ -178,7 +178,7 @@ public class ChatFragment extends Fragment {
             Storage.uploadImage(fullPhotoUri, UUID.randomUUID().toString(), task -> {
                 if (task.isSuccessful())
                     Database.createMessage(Message.TYPE_IMAGE,
-                            task.getResult().getDownloadUrl().toString(), channel.getCid(), m -> {
+                            task.getResult().getStorage().getDownloadUrl().toString(), channel.getCid(), m -> {
                             });
             });
         }
